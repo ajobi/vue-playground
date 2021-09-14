@@ -1,6 +1,5 @@
 <template>
-  <div>
-    <h1>Bubble chart d3</h1>
+  <div style="text-align: center">
     <div id="chart" />
   </div>
 </template>
@@ -16,17 +15,26 @@ export default {
     }
   },
   mounted () {
+    const chartSize = 1200
+    const defaultZoom = 1
+
     const svg = d3.select('#chart').append('svg')
-      .attr('width', 1200)
-      .attr('height', 1200)
+      .attr('width', chartSize)
+      .attr('height', chartSize)
+
+    const coordinateScale = d3.scaleLinear()
+
+    coordinateScale
+      .domain([-200, 200])
+      .range([0, chartSize * defaultZoom])
 
     svg.selectAll('circle')
       .data(this.data).enter()
       .append('circle')
-      .attr('cx', d => d.x)
-      .attr('cy', d => d.y)
-      .attr('r', d => d.val)
-      .attr('fill', '#69b3a2')
+      .attr('cx', d => coordinateScale(d.x))
+      .attr('cy', d => coordinateScale(d.y))
+      .attr('r', d => d.pointData._type === 'ARTICLE' ? d.pointData.engagement.overallScore : 40)
+      .attr('fill', d => d.pointData._type === 'ARTICLE' ? '#69b3a2' : 'gray')
   }
 }
 </script>
