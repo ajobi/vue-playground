@@ -15,7 +15,7 @@ export default {
     }
   },
   mounted () {
-    const chartSize = 1200
+    const chartSize = 2000
     const defaultZoom = 1
 
     const svg = d3.select('#chart').append('svg')
@@ -35,6 +35,8 @@ export default {
       .attr('cy', d => coordinateScale(d.y))
       .attr('r', d => d.pointData._type === 'ARTICLE' ? d.pointData.engagement.overallScore : 40)
       .attr('fill', d => d.pointData._type === 'ARTICLE' ? '#69b3a2' : 'gray')
+
+    svg.call(d3.zoom().on('zoom', (e) => d3.selectAll('#chart circle').attr('transform', e.transform)))
   }
 }
 </script>
