@@ -30,16 +30,18 @@ export default {
 
     const coordinateScaleX = d3.scaleLinear()
     const coordinateScaleY = d3.scaleLinear()
+    const radiusScaleArticle = d3.scaleLinear()
 
     coordinateScaleX.domain([-200, 200]).range([0, chartWidth * defaultZoom])
     coordinateScaleY.domain([-200, 200]).range([0, chartHeight * defaultZoom])
+    radiusScaleArticle.domain([0, 10]).range([0, 3])
 
     svg.selectAll('circle')
       .data(this.data).enter()
       .append('circle')
       .attr('cx', d => coordinateScaleX(d.x))
       .attr('cy', d => coordinateScaleY(d.y))
-      .attr('r', d => d.pointData._type === 'ARTICLE' ? d.pointData.engagement.overallScore : 40)
+      .attr('r', d => d.pointData._type === 'ARTICLE' ? radiusScaleArticle(d.pointData.engagement.overallScore) : 20)
       .attr('fill', d => d.pointData._type === 'ARTICLE' ? '#69b3a2' : 'gray')
 
     svg.call(d3.zoom().on('zoom', (e) => d3.selectAll('#chart circle').attr('transform', e.transform)))
