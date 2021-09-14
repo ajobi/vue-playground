@@ -15,24 +15,30 @@ export default {
     }
   },
   mounted () {
-    const chartSize = 2000
+    const chartWidth = 1200
+    const chartHeight = 700
     const defaultZoom = 1
 
     const svg = d3.select('#chart').append('svg')
-      .attr('width', chartSize)
-      .attr('height', chartSize)
+      .attr('width', chartWidth)
+      .attr('height', chartHeight)
 
-    const coordinateScale = d3.scaleLinear()
+    svg.append('rect')
+      .attr('width', '100%')
+      .attr('height', '100%')
+      .attr('fill', '#EEE')
 
-    coordinateScale
-      .domain([-200, 200])
-      .range([0, chartSize * defaultZoom])
+    const coordinateScaleX = d3.scaleLinear()
+    const coordinateScaleY = d3.scaleLinear()
+
+    coordinateScaleX.domain([-200, 200]).range([0, chartWidth * defaultZoom])
+    coordinateScaleY.domain([-200, 200]).range([0, chartHeight * defaultZoom])
 
     svg.selectAll('circle')
       .data(this.data).enter()
       .append('circle')
-      .attr('cx', d => coordinateScale(d.x))
-      .attr('cy', d => coordinateScale(d.y))
+      .attr('cx', d => coordinateScaleX(d.x))
+      .attr('cy', d => coordinateScaleY(d.y))
       .attr('r', d => d.pointData._type === 'ARTICLE' ? d.pointData.engagement.overallScore : 40)
       .attr('fill', d => d.pointData._type === 'ARTICLE' ? '#69b3a2' : 'gray')
 
