@@ -38,7 +38,7 @@ export default {
 
     let currentZoom = 1
 
-    const drawPoints = () => {
+    const drawPoints = (activePoint) => {
       for (const point of this.data) {
         context.beginPath()
         context.fillStyle = point.pointData._type === 'ARTICLE' ? 'rgba(105, 179, 162, 1)' : 'rgba(128, 128, 128, 0.8)'
@@ -78,9 +78,11 @@ export default {
         currentZoom = e.transform.k
       }))
 
+    let hoveredPoint = null
+
     // TODO: handle zoom / pan as well
-    d3.select(context.canvas).on('click', (event) => {
-      let node = null
+    d3.select(context.canvas).on('mousemove', (event) => {
+      hoveredPoint = null
 
       this.data.forEach(point => {
         const circle = new Path2D()
@@ -92,12 +94,15 @@ export default {
         circle.arc(px, py, r, 0, 2 * Math.PI, true)
 
         if (context.isPointInPath(circle, event.offsetX, event.offsetY)) {
-          node = point
+          hoveredPoint = point
         }
       })
 
-      if (node) {
-        console.log(node.pointData)
+      if (hoveredPoint) {
+        context.canvas.style.cursor = 'pointer'
+        console.log(hoveredPoint)
+      } else {
+        context.canvas.style.cursor = 'auto'
       }
     })
   }
