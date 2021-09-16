@@ -36,18 +36,38 @@ export default {
     context.fillStyle = '#EEE'
     context.fillRect(0, 0, context.canvas.width, context.canvas.height)
 
-    for (const point of this.data) {
-      context.beginPath()
-      context.fillStyle = point.pointData._type === 'ARTICLE' ? '#69b3a2' : 'gray'
+    const drawPoints = () => {
+      for (const point of this.data) {
+        context.beginPath()
+        context.fillStyle = point.pointData._type === 'ARTICLE' ? '#69b3a2' : 'gray'
 
-      const px = coordinateScaleX(point.x)
-      const py = coordinateScaleY(point.y)
-      const r = point.pointData._type === 'ARTICLE' ? radiusScaleArticle(point.pointData.engagement.overallScore) : 20
+        const px = coordinateScaleX(point.x)
+        const py = coordinateScaleY(point.y)
+        const r = point.pointData._type === 'ARTICLE' ? radiusScaleArticle(point.pointData.engagement.overallScore) : 20
 
-      context.arc(px, py, r, 0, 2 * Math.PI, true)
-      context.closePath()
-      context.fill()
+        context.arc(px, py, r, 0, 2 * Math.PI, true)
+        context.closePath()
+        context.fill()
+      }
     }
+
+    drawPoints()
+
+    d3.select(context.canvas).call(d3.zoom().scaleExtent([1, 8])
+      .on('zoom', (e) => {
+        context.save()
+        context.clearRect(0, 0, chartWidth, chartHeight)
+
+        context.fillStyle = '#EEE'
+        context.fillRect(0, 0, context.canvas.width, context.canvas.height)
+
+        context.translate(e.transform.x, e.transform.y)
+        context.scale(e.transform.k, e.transform.k)
+
+        drawPoints()
+
+        context.restore()
+      }))
 
     // const svg = d3.select('#chart').append('svg')
     //   .attr('width', chartWidth)
