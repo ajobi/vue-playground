@@ -13,3 +13,13 @@ export default defineComponent({
   components: { BubbleChartD3 }
 })
 </script>
+
+<style>
+.home {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+</style>

@@ -1,5 +1,5 @@
 <template>
-  <div style="text-align: center">
+  <div>
     <div id="chart" />
   </div>
 </template>
