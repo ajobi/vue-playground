@@ -19,7 +19,6 @@ export default createStore({
       const dataPercentageToKeep = Math.min(100, (diffMonths / 12) * 100)
 
       const responseCopy = JSON.parse(JSON.stringify(state.data))
-      const world = responseCopy.world
 
       delete responseCopy.world
       delete responseCopy.date
@@ -80,16 +79,10 @@ export default createStore({
         }
       })
 
-      return {
-        minX: world.min_X,
-        minY: world.min_Y,
-        maxX: world.max_X,
-        maxY: world.max_Y,
-        points: [
-          ...topicPoints,
-          ...articlePoints
-        ]
-      }
+      return [
+        ...topicPoints,
+        ...articlePoints
+      ]
     }
   }
 })

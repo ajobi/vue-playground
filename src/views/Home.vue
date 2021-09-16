@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <BubbleChartD3 :data="$store.getters.data.points" />
+    <BubbleChartD3 :data="$store.getters.data" />
   </div>
 </template>
 
