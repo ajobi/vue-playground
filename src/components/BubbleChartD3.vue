@@ -39,7 +39,7 @@ export default {
     const drawPoints = () => {
       for (const point of this.data) {
         context.beginPath()
-        context.fillStyle = point.pointData._type === 'ARTICLE' ? '#69b3a2' : 'gray'
+        context.fillStyle = point.pointData._type === 'ARTICLE' ? 'rgba(105, 179, 162, 1)' : 'rgba(128, 128, 128, 0.8)'
 
         const px = coordinateScaleX(point.x)
         const py = coordinateScaleY(point.y)
