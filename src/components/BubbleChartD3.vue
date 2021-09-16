@@ -36,6 +36,8 @@ export default {
     context.fillStyle = '#EEE'
     context.fillRect(0, 0, context.canvas.width, context.canvas.height)
 
+    let currentZoom = 1
+
     const drawPoints = () => {
       for (const point of this.data) {
         context.beginPath()
@@ -46,6 +48,12 @@ export default {
         const r = point.pointData._type === 'ARTICLE' ? radiusScaleArticle(point.pointData.engagement.overallScore) : 20
 
         context.arc(px, py, r, 0, 2 * Math.PI, true)
+
+        if (point.pointData._type === 'TOPIC' && currentZoom > 2) {
+          const textWidth = context.measureText(point.pointData.title).width
+          context.fillText(point.pointData.title, px - (textWidth / 2), py - 25)
+        }
+
         context.closePath()
         context.fill()
       }
@@ -67,6 +75,7 @@ export default {
         drawPoints()
 
         context.restore()
+        currentZoom = e.transform.k
       }))
 
     // TODO: handle zoom / pan as well
