@@ -5921,6 +5921,11 @@ kind-of@^6.0.0, kind-of@^6.0.2:
   resolved "https://registry.yarnpkg.com/kind-of/-/kind-of-6.0.3.tgz#07c05034a6c349fa06e24fa35aa76db4580ce4dd"
   integrity sha512-dcS1ul+9tmeD95T+x28/ehLgd9mENa3LsvDTtzm3vyBEO7RPptvAD+t44WVXaUjTBRcrpFeFlC8WCruUR456hw==
 
+konva@^8.1.4:
+  version "8.1.4"
+  resolved "https://registry.yarnpkg.com/konva/-/konva-8.1.4.tgz#489717feddff147ee171f4cdf1e2bee0c1825658"
+  integrity sha512-w75KG4Suu4C7JSNqi8xJb9Dkf4Q6de48mnDvLQ5NgFJzCAFJIh9eLTSJl6G9HMjej4qoK+kWC39PSkkl18br6Q==
+
 launch-editor-middleware@^2.2.1:
   version "2.2.1"
   resolved "https://registry.yarnpkg.com/launch-editor-middleware/-/launch-editor-middleware-2.2.1.tgz#e14b07e6c7154b0a4b86a0fd345784e45804c157"
