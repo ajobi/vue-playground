@@ -38,7 +38,7 @@ export default {
 
     let currentZoom = 1
 
-    const drawPoints = (activePoint) => {
+    const drawPoints = () => {
       for (const point of this.data) {
         context.beginPath()
         context.fillStyle = point.pointData._type === 'ARTICLE' ? 'rgba(105, 179, 162, 1)' : 'rgba(128, 128, 128, 0.8)'
@@ -61,7 +61,11 @@ export default {
 
     drawPoints()
 
-    d3.select(context.canvas).call(d3.zoom().scaleExtent([1, 8])
+    let lastZoomEvent = null
+
+    d3.select(context.canvas).call(d3.zoom()
+      .translateExtent([[0, 0], [1200, 700]])
+      .scaleExtent([1, 8])
       .on('zoom', (e) => {
         context.save()
         context.clearRect(0, 0, chartWidth, chartHeight)
@@ -73,8 +77,8 @@ export default {
         context.scale(e.transform.k, e.transform.k)
 
         drawPoints()
-
         context.restore()
+        lastZoomEvent = e
         currentZoom = e.transform.k
       }))
 
@@ -87,20 +91,31 @@ export default {
       this.data.forEach(point => {
         const circle = new Path2D()
 
-        const px = coordinateScaleX(point.x)
-        const py = coordinateScaleY(point.y)
-        const r = point.pointData._type === 'ARTICLE' ? radiusScaleArticle(point.pointData.engagement.overallScore) : 20
+        if (point.pointData.title === 'Historisch') {
+          let px = coordinateScaleX(point.x)
+          let py = coordinateScaleY(point.y)
+          let r = point.pointData._type === 'ARTICLE' ? radiusScaleArticle(point.pointData.engagement.overallScore) : 20
 
-        circle.arc(px, py, r, 0, 2 * Math.PI, true)
+          if (lastZoomEvent) {
+            const { x, y, k } = lastZoomEvent.transform
 
-        if (context.isPointInPath(circle, event.offsetX, event.offsetY)) {
-          hoveredPoint = point
+            px = px + x
+            py = py + y
+            r = r * k
+          }
+
+          circle.arc(px, py, r, 0, 2 * Math.PI, true)
+          // context.arc(px, py, r, 0, 2 * Math.PI, true)
+          // context.stroke()
+
+          if (context.isPointInPath(circle, event.offsetX, event.offsetY)) {
+            hoveredPoint = point
+          }
         }
       })
 
       if (hoveredPoint) {
         context.canvas.style.cursor = 'pointer'
-        console.log(hoveredPoint)
       } else {
         context.canvas.style.cursor = 'auto'
       }
