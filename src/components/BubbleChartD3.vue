@@ -16,7 +16,7 @@ export default {
   },
   mounted () {
     const BACKGROUND_COLOR_CANVAS = '#EEE'
-    const BACKGROUND_ARTICLE = 'rgba(105, 179, 162, 0.8)'
+    const BACKGROUND_ARTICLE = 'rgba(161,210,199,0.8)'
     const BACKGROUND_TOPIC = 'rgba(128, 128, 128, 0.8)'
     const MIN_ZOOM = 1
     const MAX_ZOOM = 8
