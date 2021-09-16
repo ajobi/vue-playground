@@ -15,17 +15,22 @@ export default {
     }
   },
   mounted () {
+    const BACKGROUND_COLOR_CANVAS = '#EEE'
+    const BACKGROUND_ARTICLE = 'rgba(105, 179, 162, 0.8)'
+    const BACKGROUND_TOPIC = 'rgba(128, 128, 128, 0.8)'
+    const MIN_ZOOM = 1
+    const MAX_ZOOM = 8
+
     const chartWidth = 1200
     const chartHeight = 700
-    const defaultZoom = 1
 
     const coordinateScaleX = d3.scaleLinear()
     const coordinateScaleY = d3.scaleLinear()
-    const radiusScaleArticle = d3.scaleLinear()
+    const radiusScale = d3.scaleLinear()
 
-    coordinateScaleX.domain([-200, 200]).range([0, chartWidth * defaultZoom])
-    coordinateScaleY.domain([-200, 200]).range([0, chartHeight * defaultZoom])
-    radiusScaleArticle.domain([0, 10]).range([0, 3])
+    coordinateScaleX.domain([-200, 200]).range([0, chartWidth])
+    coordinateScaleY.domain([-200, 200]).range([0, chartHeight])
+    radiusScale.domain([0, 70]).range([0, 20])
 
     const canvasChart = d3.select('#chart').append('canvas')
       .attr('width', chartWidth)
@@ -33,23 +38,23 @@ export default {
 
     const context = canvasChart.node().getContext('2d')
 
-    context.fillStyle = '#EEE'
+    context.fillStyle = BACKGROUND_COLOR_CANVAS
     context.fillRect(0, 0, context.canvas.width, context.canvas.height)
 
-    let currentZoom = 1
+    let lastZoomEvent = null
 
     const drawPoints = () => {
       for (const point of this.data) {
         context.beginPath()
-        context.fillStyle = point.pointData._type === 'ARTICLE' ? 'rgba(105, 179, 162, 1)' : 'rgba(128, 128, 128, 0.8)'
+        context.fillStyle = point.pointData._type === 'ARTICLE' ? BACKGROUND_ARTICLE : BACKGROUND_TOPIC
 
         const px = coordinateScaleX(point.x)
         const py = coordinateScaleY(point.y)
-        const r = point.pointData._type === 'ARTICLE' ? radiusScaleArticle(point.pointData.engagement.overallScore) : 20
+        const r = radiusScale(point.r)
 
         context.arc(px, py, r, 0, 2 * Math.PI, true)
 
-        if (point.pointData._type === 'TOPIC' && currentZoom > 2) {
+        if (point.pointData._type === 'TOPIC' && lastZoomEvent && lastZoomEvent.transform.k > 2) {
           const textWidth = context.measureText(point.pointData.title).width
           context.fillText(point.pointData.title, px - (textWidth / 2), py - 25)
         }
@@ -61,16 +66,14 @@ export default {
 
     drawPoints()
 
-    let lastZoomEvent = null
-
     d3.select(context.canvas).call(d3.zoom()
       .translateExtent([[0, 0], [chartWidth, chartHeight]])
-      .scaleExtent([1, 8])
+      .scaleExtent([MIN_ZOOM, MAX_ZOOM])
       .on('zoom', (e) => {
         context.save()
         context.clearRect(0, 0, chartWidth, chartHeight)
 
-        context.fillStyle = '#EEE'
+        context.fillStyle = BACKGROUND_COLOR_CANVAS
         context.fillRect(0, 0, context.canvas.width, context.canvas.height)
 
         context.translate(e.transform.x, e.transform.y)
@@ -79,7 +82,6 @@ export default {
         drawPoints()
         context.restore()
         lastZoomEvent = e
-        currentZoom = e.transform.k
       }))
 
     let hoveredPoint = null
@@ -92,7 +94,7 @@ export default {
 
         let px = coordinateScaleX(point.x)
         let py = coordinateScaleY(point.y)
-        let r = point.pointData._type === 'ARTICLE' ? radiusScaleArticle(point.pointData.engagement.overallScore) : 20
+        let r = radiusScale(point.r)
 
         if (lastZoomEvent) {
           const {

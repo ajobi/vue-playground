@@ -50,6 +50,7 @@ export default createStore({
       const topicPoints = topics.map(topic => ({
         x: topic.x,
         y: topic.y,
+        r: 70,
         pointData: {
           id: topic.topic_id,
           title: topic.title,
@@ -57,7 +58,7 @@ export default createStore({
         }
       }))
 
-      const articlePoints = articles.map(({ article, topicId }) => {
+      const articlePoints = articles.map(({ article }) => {
         let overallScore = 2
 
         if (article.engagement > 70) {
@@ -71,14 +72,9 @@ export default createStore({
         return {
           x: article.x,
           y: article.y,
+          r: overallScore,
           pointData: {
             id: article.article_id,
-            engagement: {
-              overallScore
-            },
-            topics: [
-              { id: topicId }
-            ],
             _type: 'ARTICLE'
           }
         }
@@ -95,9 +91,5 @@ export default createStore({
         ]
       }
     }
-  },
-  actions: {
-  },
-  modules: {
   }
 })
