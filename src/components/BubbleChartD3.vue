@@ -95,7 +95,11 @@ export default {
         let r = point.pointData._type === 'ARTICLE' ? radiusScaleArticle(point.pointData.engagement.overallScore) : 20
 
         if (lastZoomEvent) {
-          const { x, y, k } = lastZoomEvent.transform
+          const {
+            x,
+            y,
+            k
+          } = lastZoomEvent.transform
 
           px = px * k + x
           py = py * k + y
@@ -113,6 +117,12 @@ export default {
         context.canvas.style.cursor = 'pointer'
       } else {
         context.canvas.style.cursor = 'auto'
+      }
+    })
+
+    d3.select(context.canvas).on('click', () => {
+      if (hoveredPoint) {
+        alert(`${hoveredPoint.pointData._type} - ${hoveredPoint.pointData.id}`)
       }
     })
   }
