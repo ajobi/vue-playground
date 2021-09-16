@@ -64,7 +64,7 @@ export default {
     let lastZoomEvent = null
 
     d3.select(context.canvas).call(d3.zoom()
-      .translateExtent([[0, 0], [1200, 700]])
+      .translateExtent([[0, 0], [chartWidth, chartHeight]])
       .scaleExtent([1, 8])
       .on('zoom', (e) => {
         context.save()
