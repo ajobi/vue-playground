@@ -84,33 +84,28 @@ export default {
 
     let hoveredPoint = null
 
-    // TODO: handle zoom / pan as well
     d3.select(context.canvas).on('mousemove', (event) => {
       hoveredPoint = null
 
       this.data.forEach(point => {
         const circle = new Path2D()
 
-        if (point.pointData.title === 'Historisch') {
-          let px = coordinateScaleX(point.x)
-          let py = coordinateScaleY(point.y)
-          let r = point.pointData._type === 'ARTICLE' ? radiusScaleArticle(point.pointData.engagement.overallScore) : 20
+        let px = coordinateScaleX(point.x)
+        let py = coordinateScaleY(point.y)
+        let r = point.pointData._type === 'ARTICLE' ? radiusScaleArticle(point.pointData.engagement.overallScore) : 20
 
-          if (lastZoomEvent) {
-            const { x, y, k } = lastZoomEvent.transform
+        if (lastZoomEvent) {
+          const { x, y, k } = lastZoomEvent.transform
 
-            px = px + x
-            py = py + y
-            r = r * k
-          }
+          px = px * k + x
+          py = py * k + y
+          r = r * k
+        }
 
-          circle.arc(px, py, r, 0, 2 * Math.PI, true)
-          // context.arc(px, py, r, 0, 2 * Math.PI, true)
-          // context.stroke()
+        circle.arc(px, py, r, 0, 2 * Math.PI, true)
 
-          if (context.isPointInPath(circle, event.offsetX, event.offsetY)) {
-            hoveredPoint = point
-          }
+        if (context.isPointInPath(circle, event.offsetX, event.offsetY)) {
+          hoveredPoint = point
         }
       })
 
