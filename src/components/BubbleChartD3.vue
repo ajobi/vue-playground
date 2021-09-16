@@ -43,6 +43,13 @@ export default {
       .attr('cy', d => coordinateScaleY(d.y))
       .attr('r', d => d.pointData._type === 'ARTICLE' ? radiusScaleArticle(d.pointData.engagement.overallScore) : 20)
       .attr('fill', d => d.pointData._type === 'ARTICLE' ? '#69b3a2' : 'gray')
+      .attr('cursor', 'pointer')
+      .attr('data-type', d => d.pointData._type)
+      .attr('data-id', d => d.pointData.id)
+
+    svg.selectAll('circle').on('click', (d) => {
+      alert(`${d.target.getAttribute('data-type')} ${d.target.getAttribute('data-id')}`)
+    })
 
     svg.call(d3.zoom().on('zoom', (e) => d3.selectAll('#chart circle').attr('transform', e.transform)))
   }
