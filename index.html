@@ -1,0 +1,1472 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@700&display=swap');
+</style>
+
+<style>
+    .article-body h2 {
+        font-size: 20px;
+        font-weight: 700;
+        line-height: 26px;
+    }
+
+
+
+    /* breakpoint stuff*/
+    @media (min-width: 960px){
+        .layout .story .story-article {
+            --w1-kicker: 400 1.8rem/2.8rem Roboto Condensed, Arial Narrow, Arial, sans-serif;
+            --w1-title: 700 3.8rem/3.8rem Roboto Condensed, Arial Narrow, Arial, sans-serif;
+            --w1-subtitle: 400 1.8rem/2.5rem Roboto, Arial, sans-serif;
+            --w1-meta: 400 1.8rem/2.8rem Roboto, Arial, sans-serif;
+        }
+    }
+    @media (max-width: 767.9px){
+        .layout .story {
+            padding: 0 var(--site--core-padding);
+        }
+    }
+
+    /* site specific */
+
+
+
+
+    article.story-article {
+        max-width: 615px;
+    }
+
+    article.story-article p{
+        max-width: 615px;
+        margin: auto;
+    }
+    h1 {
+        max-width: 615px;
+        margin-left:auto;
+        margin-right: auto;
+    }
+
+
+    .layout .story .story-article {
+        --w1-kicker: 400 1.6rem/2.5rem Roboto Condensed, Arial Narrow, Arial, sans-serif;
+        --w1-title: 700 3.2rem/3.2rem Roboto Condensed, Arial Narrow, Arial, sans-serif;
+        --w1-subtitle: 400 1.8rem/2.5rem Roboto, Arial, sans-serif;
+        --w1-meta: 400 1.6rem/2.1rem Roboto, Arial, sans-serif;
+        --w1-text: 400 1.8rem/2.8rem Roboto, Arial, sans-serif;
+        --w1-caption: 400 1.7rem/2.3rem Roboto, Arial, sans-serif;
+        --w1-small: 400 1.2rem/1.4rem Roboto, Arial, sans-serif;
+        font: 400 1.8rem/2.8rem "Roboto", Arial, sans-serif;
+        font: var(--w1-text);
+    }
+
+    .layout .story .story-article .cg_article-header .article-kicker {
+        font: var(--w1-kicker);
+        margin: 0 0 8px;
+        text-transform: uppercase;
+    }
+    .layout .story .story-article .cg_article-header .article-title {
+        font: var(--w1-title);
+        margin: 0 0 8px;
+
+    }
+    .cg_article--header{
+        margin-left: calc((100% - 615px) / 2);
+        margin-top: 1.6rem;
+        max-width: calc(615px + (calc((100% - 615px) / 2)) / 2);
+    }
+
+    .layout .story .story-article .cg_article-header .article-subtitle {
+        font: 400 1.8rem/2.5rem "Roboto", Arial, sans-serif;
+        font: var(--w1-subtitle);
+        margin: 0;
+    }
+
+
+
+
+    .layout .story .story-article .article-body > * {
+        box-sizing: border-box;
+        margin-left: auto;
+        margin-right: auto;
+        max-width: var(--story-width);
+    }
+
+
+    .layout .story .story-article [data-section-type='image'] figure[data-type='image'] {
+        --component-name: 'editorial--figure-image';
+    }
+
+    .layout .story .story-article [data-section-type='image'] figure[data-type='image'] picture {
+        display: block;
+        min-height: 100px;
+        position: relative;
+    }
+
+    .layout .story .story-article [data-section-type] figure figcaption {
+        font: var(--w1-caption);
+        padding: 1.5rem 0 0;
+    }
+
+    .layout .story .story-article [data-section-type] figure figcaption + footer {
+        padding: 0.6rem 0 0;
+        text-align: left;
+    }
+    .layout .story .story-article [data-section-type] figure footer {
+        font: 400 1.2rem/1.4rem "Roboto", Arial, sans-serif;
+        font: var(--w1-small);
+        opacity: 0.3;
+        padding: 0.6rem 0 0;
+        text-align: right;
+    }
+
+
+    /* related stuff */
+
+    .layout .story-recommended {
+        margin: 30px calc(var(--site--core-margin-right) * -1) 30px calc(var(--site--core-margin-left) * -1);
+        overflow-x: auto;
+        position: relative;
+        grid-column: content / span 4;
+    }
+
+
+
+    .layout .story-recommended > div {
+        margin-top: var(--column);
+        max-width: 1245px;
+        position: relative;
+        width: calc(100vw * 3);
+    }
+
+    @media (max-width: 959.9px) {
+        .layout .story-recommended > div {
+            background: linear-gradient(to bottom, rgba(0, 0, 0, 0.08), rgba(0, 0, 0, 0.03));
+            --gap: 0;
+        }
+    }
+
+    @media (min-width: 768px) and (max-width: 959.9px) {
+        .layout .story-recommended > div {
+            padding-left: var(--site--core-margin-left);
+        }
+    }
+
+    @media (min-width: 960px) {
+        .layout .story-recommended > div {
+            max-width: none;
+            width: auto;
+        }
+    }
+
+    @media (min-width: 960px) {
+        .layout .story-recommended > div::before {
+            background: linear-gradient(to bottom, rgba(0, 0, 0, 0.08), rgba(0, 0, 0, 0.03));
+            content: '';
+            display: block;
+            height: 100%;
+            position: absolute;
+            -webkit-transform: translatex(calc(var(--site--core-margin-left) * -1));
+            transform: translatex(calc(var(--site--core-margin-left) * -1));
+            width: 100vw;
+        }
+    }
+
+    @media all and (min-width: 960px) and (-ms-high-contrast: none), (min-width: 960px) and (-ms-high-contrast: active) {
+        .layout .story-recommended > div::before {
+            width: 100%;
+        }
+    }
+
+    @media (min-width: 2100px) {
+        .layout .story-recommended > div::before {
+            -webkit-transform: translateX(calc((100vw - var(--site--core-maxwidth)) / 2 * -1));
+            transform: translateX(calc((100vw - var(--site--core-maxwidth)) / 2 * -1));
+        }
+    }
+
+    .layout .story-recommended.story-recommended-top {
+        margin-top: 0;
+    }
+
+    .layout .story-recommended > h1 {
+        -webkit-align-self: end;
+        -ms-flex-item-align: end;
+        align-self: end;
+        font-size: 1.8rem;
+        font-weight: normal;
+        grid-column: auto / span 12;
+        left: var(--site--core-padding);
+        line-height: 2.8rem;
+        margin: 0 var(--site--core-padding);
+        position: -webkit-sticky;
+        position: sticky;
+    }
+
+    @media (min-width: 768px) and (max-width: 959.9px) {
+        .layout .story-recommended > h1 {
+            padding-left: var(--site--core-margin-left);
+        }
+    }
+
+    @media (min-width: 768px) {
+        .layout .story-recommended > h1 {
+            left: 0;
+            margin: 0;
+        }
+    }
+
+    @media (min-width: 960px) {
+        .layout .story-recommended > h1 {
+            position: relative;
+        }
+    }
+
+    .layout .story-recommended article {
+        grid-column: auto / span 3;
+        grid-row: 1;
+        --tile-border-width: 0 !important;
+    }
+
+    @media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+        .layout .story-recommended article {
+            margin: 0 18px;
+        }
+    }
+
+    @media (min-width: 960px) {
+        .layout .story-recommended {
+            grid-column: content / span 12;
+        }
+    }
+
+    .layout .story-recommended > div,
+    .layout {
+        box-sizing: border-box;
+        display: grid;
+        grid-column-gap: var(--gap);
+        grid-row-gap: var(--row-gap, var(--gap));
+        grid-template-columns: var(--template-columns);
+    }
+
+    .layout .story-recommended > div {
+        --template-columns: [content] repeat(12, 1fr);
+    }
+
+    .layout .story-recommended article {
+        border: solid;
+        border-color: rgba(67, 67, 67, 0.1);
+        border-width: 0 0 1px;
+        margin-bottom: 15px;
+        background: var(--tile-background);
+        border: var(--tile-border);
+        border-color: var(--tile-border-color);
+        border-width: var(--tile-border-width);
+        display: -webkit-flex;
+        display: -ms-flexbox;
+        display: flex;
+        margin: var(--tile-margin);
+        min-height: var(--tile-min-height);
+        position: relative;
+        --tile-background: unset;
+        --tile-border: unset;
+        --tile-border-color: unset;
+        --tile-border-width: unset;
+        --tile-direction: column;
+        --tile-margin: unset;
+        --tile-min-height: initial;
+        --tile-name: "tile-initial";
+        --tile-padding: var(--grid-column);
+        --tile-primarytint: unset;
+        --tile-secondarytint: unset;
+    }
+
+    .layout .story-recommended article > * {
+        color: #343434;
+        -webkit-flex-direction: row;
+        -ms-flex-direction: row;
+        flex-direction: row;
+        padding: 18px 0;
+        box-sizing: border-box;
+        color: var(--tile-primarytint);
+        display: -webkit-flex;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-flex-direction: var(--tile-direction);
+        -ms-flex-direction: var(--tile-direction);
+        flex-direction: var(--tile-direction);
+        -webkit-flex-grow: 1;
+        -ms-flex-positive: 1;
+        flex-grow: 1;
+        max-width: 100%;
+        padding: var(--tile-padding);
+        text-decoration: none;
+    }
+
+    .layout .story-recommended article {
+        --w1-small: 400 1.4rem/1.7rem "Roboto Condensed", "Arial Narrow", Arial, sans-serif;
+        --w1-title: 700 1.6rem/1.9rem "Roboto", Arial, sans-serif;
+        --w1-text: 400 1.5rem/1.9rem "Roboto", Arial, sans-serif;
+        --w2-small: inherit;
+        --w2-title: 900 1.8rem/2rem "Roboto", Arial, sans-serif;
+        --w2-text: var(--w1-text);
+        --w3-small: var(--w1-small);
+        --w3-title: 900 2.4rem/2.6rem "Roboto", Arial, sans-serif;
+        --w3-text: 400 1.5rem/1.9rem "Roboto", Arial, sans-serif;
+        --w4-small: var(--w1-small);
+        --w4-title: 900 2.7rem/2.7rem "Roboto", Arial, sans-serif;
+        --w4-text: var(--w3-text);
+        --w5-small: var(--w1-small);
+        --w5-title: 900 2.9rem/2.9rem "Roboto", Arial, sans-serif;
+        --w5-text: 400 1.7rem/2.1rem "Roboto", Arial, sans-serif;
+        --w6-small: var(--w6-small);
+        --w6-title: 900 3.6rem/3.6rem "Roboto", Arial, sans-serif;
+        --w6-text: var(--w5-text);
+        --tile-name: "tile--article-initial";
+        --tile-border: unset;
+        --tile-background: transparent;
+        --tile-primarytint: var(--theme-primarytint);
+        --tile-secondarytint: var(--theme-secondarytint);
+        --tile-border-color: rgba(67, 67, 67, 0.1);
+        --tile-border-width: unset;
+        --tile-direction: row;
+        --tile-margin: unset;
+        --tile-min-height: initial;
+        --tile-padding: 0;
+        --tile-icon-filter: invert(35%);
+        --tile-icon-opacity: 1;
+        --figure-aspectratio: 0;
+        --figure-basis: auto;
+        --figure-display: flex;
+        --figure-minheight: var(--grid-block-width);
+        --figure-maxheight: var(--grid-block-width);
+        --figure-minwidth: var(--grid-block-width);
+        --figure-maxwidth: var(--grid-block-width);
+        --figure-align: flex-start;
+        --figure-position: unset;
+        --header-background: none;
+        --header-border-width: 0;
+        --header-contextual-border-width: 0;
+        --header-basis: calc(100% - var(--figure-basis));
+        --header-padding: 0 var(--grid-column);
+        --header-align-content: flex-start;
+        --header-align-self: auto;
+        --header-order: unset;
+        --header-text-shadow: unset;
+        --header-margin: 0;
+        --header-contextualmargin: 0;
+        --kicker-font: var(--w1-small);
+        --kicker-contextual-font: var(--kicker-font);
+        --label-fontsize: 1.2rem;
+        --label-lineheight: 1rem;
+        --label-bgcolor: transparent;
+        --label-txtcolor: --tile-primarycolor;
+        --label-padding: 2px 4px 1px;
+        --label-position: absolute;
+        --label-left: var(--grid-column);
+        --label-top: var(--grid-column);
+        --title-font: var(--w1-title);
+        --title-contextual-font: var(--title-font);
+        --subtitle-border-color: rgba(0, 0, 0, 0.07);
+        --subtitle-border-display: none;
+        --subtitle-contextual-border-display: none;
+        --subtitle-font: var(--w1-text);
+        --subtitle-contextual-font: var(--subtitle-font);
+        --subtitle-display: block;
+        --subtitle-contextualdisplay: block;
+        min-height: auto;
+        min-height: var(--tile-min-height);
+    }
+
+    @media (min-width: 768px) {
+        .layout .story-recommended article {
+            --w1-small: 400 1.4rem/1.7rem "Roboto Condensed", "Arial Narrow", Arial, sans-serif;
+            --w1-title: 700 1.75rem/2.1rem "Roboto", Arial, sans-serif;
+            --w1-text: 400 1.5rem/1.9rem "Roboto", Arial, sans-serif;
+            --w2-small: var(--w1-small);
+            --w2-title: 900 1.8rem/2rem "Roboto", Arial, sans-serif;
+            --w2-text: var(--w1-text);
+            --w3-small: var(--w1-small);
+            --w3-title: 900 2.4rem/2.6rem "Roboto", Arial, sans-serif;
+            --w3-text: 400 1.5rem/1.9rem "Roboto", Arial, sans-serif;
+            --w4-small: var(--w1-small);
+            --w4-title: 900 2.7rem/2.7rem "Roboto", Arial, sans-serif;
+            --w4-text: var(--w3-text);
+            --w5-small: var(--w1-small);
+            --w5-title: 900 2.9rem/2.9rem "Roboto", Arial, sans-serif;
+            --w5-text: 400 1.7rem/2.1rem "Roboto", Arial, sans-serif;
+            --w6-small: var(--w1-small);
+            --w6-title: 900 3.6rem/3.6rem "Roboto", Arial, sans-serif;
+            --w6-text: var(--w5-text);
+        }
+    }
+
+    @media (min-width: 960px) {
+        .layout .story-recommended article {
+            --w1-small: 400 1.3rem/1.7rem "Roboto Condensed", "Arial Narrow", Arial, sans-serif;
+            --w1-title: 700 1.5rem/1.8rem "Roboto", Arial, sans-serif;
+            --w1-text: 400 1.4rem/1.8rem "Roboto", Arial, sans-serif;
+            --w2-small: var(--w1-small);
+            --w2-title: 900 1.6rem/1.9rem "Roboto", Arial, sans-serif;
+            --w2-text: var(--w1-text);
+            --w3-small: var(--w1-small);
+            --w3-title: 900 2.1rem/2.2rem "Roboto", Arial, sans-serif;
+            --w3-text: 400 1.4rem/1.9rem "Roboto", Arial, sans-serif;
+            --w4-small: var(--w1-small);
+            --w4-title: 900 2.2rem/2.2rem "Roboto", Arial, sans-serif;
+            --w4-text: var(--w3-text);
+            --w5-small: var(--w1-small);
+            --w5-title: 900 2.5rem/2.5rem "Roboto", Arial, sans-serif;
+            --w5-text: 400 1.6rem/2.1rem "Roboto", Arial, sans-serif;
+            --w6-small: var(--w1-small);
+            --w6-title: 900 2.7rem/2.7rem "Roboto", Arial, sans-serif;
+            --w6-text: 400 1.7rem/2.2rem "Roboto", Arial, sans-serif;
+        }
+    }
+
+    @media (min-width: 1690px) {
+        .layout .story-recommended article {
+            --w1-small: 400 1.4rem/1.7rem "Roboto Condensed", "Arial Narrow", Arial, sans-serif;
+            --w1-title: 700 1.7rem/2rem "Roboto", Arial, sans-serif;
+            --w1-text: 400 1.5rem/1.9rem "Roboto", Arial, sans-serif;
+            --w2-small: var(--w1-small);
+            --w2-title: 900 1.9rem/2.2rem "Roboto", Arial, sans-serif;
+            --w2-text: var(--w1-text);
+            --w3-small: var(--w1-small);
+            --w3-title: 900 2.4rem/2.6rem "Roboto", Arial, sans-serif;
+            --w3-text: 400 1.55rem/2rem "Roboto", Arial, sans-serif;
+            --w4-small: var(--w1-small);
+            --w4-title: 900 2.6rem/2.7rem "Roboto", Arial, sans-serif;
+            --w4-text: 400 1.55rem/2rem "Roboto", Arial, sans-serif;
+            --w5-small: var(--w1-small);
+            --w5-title: 900 2.9rem/2.9rem "Roboto", Arial, sans-serif;
+            --w5-text: 400 1.55rem/2rem "Roboto", Arial, sans-serif;
+            --w6-small: var(--w1-small);
+            --w6-title: 900 3.3rem/3.5rem "Roboto", Arial, sans-serif;
+            --w6-text: 400 1.55rem/2rem "Roboto", Arial, sans-serif;
+        }
+    }
+
+    .layout .story-recommended article[data-theme] {
+        background-color: var(--theme-background);
+    }
+
+    .layout .story-recommended article > * {
+        color: #434343;
+        color: var(--tile-secondarytint);
+    }
+
+    .layout .story-recommended article figure {
+        display: -webkit-flex;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-flex-basis: 90px;
+        -ms-flex-preferred-size: 90px;
+        flex-basis: 90px;
+        max-height: 90px;
+        max-width: 90px;
+        min-height: 90px;
+        min-width: 90px;
+        -webkit-align-self: var(--figure-align);
+        -ms-flex-item-align: var(--figure-align);
+        align-self: var(--figure-align);
+        background: rgba(0, 0, 0, 0.1);
+        display: var(--figure-display);
+        -webkit-flex-basis: var(--figure-basis);
+        -ms-flex-preferred-size: var(--figure-basis);
+        flex-basis: var(--figure-basis);
+        margin: 0;
+        max-height: var(--figure-maxheight);
+        max-width: var(--figure-maxwidth);
+        min-height: var(--figure-minheight);
+        min-width: var(--figure-minwidth);
+        position: var(--figure-position);
+        z-index: 1;
+    }
+
+    .layout .story-recommended article figure picture {
+        display: block;
+        -webkit-flex-grow: 1;
+        -ms-flex-positive: 1;
+        flex-grow: 1;
+        position: relative;
+    }
+
+    .layout .story-recommended article figure picture::before {
+        content: '';
+        display: block;
+        padding-bottom: calc(100% / (var(--figure-aspectratio)));
+    }
+
+    .layout .story-recommended article figure img {
+        height: 100%;
+        left: 0;
+        object-fit: cover;
+        position: absolute;
+        top: 0;
+        width: 100%;
+    }
+
+    .layout .story-recommended article figure footer,
+    .layout .story-recommended article figure figcaption {
+        display: none;
+    }
+
+    .layout .story-recommended article header {
+        -webkit-flex-basis: calc(100% - 90px);
+        -ms-flex-preferred-size: calc(100% - 90px);
+        flex-basis: calc(100% - 90px);
+        margin: 0;
+        -webkit-order: unset;
+        -ms-flex-order: unset;
+        order: unset;
+        padding: 0 18px;
+        -webkit-align-content: var(--header-align-content);
+        -ms-flex-line-pack: var(--header-align-content);
+        align-content: var(--header-align-content);
+        -webkit-align-items: baseline;
+        -ms-flex-align: baseline;
+        align-items: baseline;
+        -webkit-align-self: var(--header-align-self);
+        -ms-flex-item-align: var(--header-align-self);
+        align-self: var(--header-align-self);
+        background: var(--header-background);
+        border: var(--header-border);
+        border-width: var(--header-border-width);
+        box-sizing: border-box;
+        display: -webkit-flex;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-flex-basis: var(--header-basis);
+        -ms-flex-preferred-size: var(--header-basis);
+        flex-basis: var(--header-basis);
+        -webkit-flex-wrap: wrap;
+        -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+        margin: var(--header-margin);
+        -webkit-order: var(--header-order);
+        -ms-flex-order: var(--header-order);
+        order: var(--header-order);
+        padding: var(--header-padding);
+        text-shadow: var(--header-text-shadow);
+        z-index: 1;
+    }
+
+    @media (min-width: 960px) {
+        .story-recommended.js-story-recommended article:nth-child(n+5) {
+            grid-row: 2!important;
+        }
+    }
+
+    @media (max-width: 959.9px) {
+        .layout .story-recommended > div {
+            --template-columns: [content] repeat(18, 1fr)!important;
+        }
+    }
+
+    .layout .story-recommended article .teaser-postingcount,
+    .layout .story-recommended article .teaser-kicker {
+        font: 600 1.4rem/2.1rem "Roboto Condensed", "Arial Narrow", Arial, sans-serif;
+        font: var(--kicker-font);
+        letter-spacing: 0.01em;
+    }
+
+    .layout .story-recommended article .teaser-postingcount {
+        -webkit-align-items: baseline;
+        -ms-flex-align: baseline;
+        align-items: baseline;
+        display: -webkit-flex;
+        display: -ms-flexbox;
+        display: flex;
+    }
+
+    .layout .story-recommended article .teaser-postingcount:empty {
+        display: none;
+    }
+
+    .layout .story-recommended article .teaser-postingcount span {
+        display: none;
+    }
+
+    .layout .story-recommended article .teaser-postingcount:not(:empty)::before {
+        content: '';
+        display: inline-block;
+        -webkit-filter: var(--tile-icon-filter);
+        filter: var(--tile-icon-filter);
+        margin-right: 3px;
+        /* Add leading slash, because svg-sprite package doesnt do it */
+        background: url("/svg/sprites/base/sprite.css-54aafc6f.svg") no-repeat;
+        background-position: 98.5563041385948% 31.212828282828283%;
+        width: 15px;
+        height: 10px;
+    }
+
+    .layout .story-recommended article .teaser-postingcount:not(:empty) + .teaser-kicker {
+        margin-right: 10px;
+    }
+
+    .layout .story-recommended article .teaser-kicker {
+        margin: 0 1ex 0 0;
+        text-transform: uppercase;
+    }
+
+    .layout .story-recommended article .storylabels {
+        color: var(--theme-primarydeco);
+        font: var(--kicker-font);
+        font-weight: 700;
+        letter-spacing: 0.01em;
+        margin-right: 1ex;
+        margin-top: 1ex;
+        text-transform: uppercase;
+    }
+
+    .layout .story-recommended article h1 {
+        color: #343434;
+        font: 600 1.8rem/2.1rem "Roboto Condensed", "Arial Narrow", Arial, sans-serif;
+        color: var(--tile-primarytint);
+        -webkit-flex-basis: 100%;
+        -ms-flex-preferred-size: 100%;
+        flex-basis: 100%;
+        font: var(--title-font);
+        margin: 0.5ex 0 0;
+        position: relative;
+    }
+
+    .layout .story-recommended article .teaser-subtitle {
+        font: 400 1.5rem/1.8rem "Roboto", Arial, sans-serif;
+        display: var(--subtitle-display);
+        -webkit-flex-basis: 100%;
+        -ms-flex-preferred-size: 100%;
+        flex-basis: 100%;
+        font: var(--subtitle-font);
+        margin: 1ex 0 0;
+    }
+
+    .layout .story-recommended article .teaser-subtitle::before {
+        display: none;
+        width: 0;
+        background-color: var(--subtitle-border-color);
+        content: '';
+        display: var(--subtitle-border-display);
+        height: 1px;
+        margin: 0.5ex 0 1.5ex;
+        width: 35px;
+    }
+
+    .layout .story-recommended article figure + header {
+        margin: 0;
+        margin: var(--header-contextualmargin);
+    }
+
+    .layout .story-recommended article figure + header .teaser-postingcount,
+    .layout .story-recommended article figure + header .teaser-kicker {
+        font: var(--kicker-contextual-font);
+    }
+
+    .layout .story-recommended article figure + header h1 {
+        font: var(--title-contextual-font);
+    }
+
+    .layout .story-recommended article figure + header .teaser-subtitle {
+        display: var(--subtitle-contextualdisplay);
+        font: var(--subtitle-contextual-font);
+    }
+
+    .layout .story-recommended article figure + header .teaser-subtitle::before {
+        display: var(--subtitle-contextual-border-display);
+    }
+
+    .layout .story-recommended article figure + header::after {
+        width: var(--header-contextual-border-width);
+    }
+
+    .layout .story-recommended article figure + header h1 + .teaser-subtitle {
+        display: none;
+        display: var(--subtitle-contextualdisplay);
+    }
+
+    .layout .story-recommended article[data-type='live'] {
+        --tile-primarytint: var(--theme-live-primarytint, var(--theme-primarytint)) !important;
+        --tile-secondarytint: var(--theme-live-secondarytint, var(--theme-secondarytint)) !important;
+        --theme-primarydeco: var(--theme-live-primarydeco) !important;
+    }
+
+    .layout .story-recommended article[data-type='live'] .storylabels {
+        display: -webkit-flex;
+        display: -ms-flexbox;
+        display: flex;
+    }
+
+    .layout .story-recommended article[data-type='live'] .storylabels [data-label-livemode] {
+        background-color: var(--theme-primarydeco);
+        color: var(--theme-live-secondarydeco);
+        -webkit-order: 1;
+        -ms-flex-order: 1;
+        order: 1;
+        padding: 1px 3px 1px 0;
+    }
+
+    .layout .story-recommended article[data-type='live'] .storylabels [data-label-livemode]::before {
+        content: '/ ';
+    }
+
+    .layout .story-recommended article[data-type='live'] .storylabels [data-label-livemode] + [data-label-category] {
+        background-color: var(--theme-primarydeco);
+        color: var(--theme-live-secondarydeco);
+        margin-left: -3px;
+        padding: 1px 3px;
+    }
+
+    .layout .story-recommended article[data-opinion],
+    .layout .story-recommended article.is-opinion {
+        --tile-background: var(--theme-opinion-background) !important;
+        --tile-primarytint: var(--theme-opinion-primarytint, var(--theme-primarytint)) !important;
+        --tile-secondarytint: var(--theme-opinion-secondarytint, var(--theme-secondarytint)) !important;
+        --theme-primarydeco: var(--theme-opinion-primarydeco) !important;
+    }
+
+    .layout .story-recommended article[data-opinion] .storylabels span,
+    .layout .story-recommended article.is-opinion .storylabels span {
+        background-color: var(--theme-primarydeco);
+        color: var(--theme-opinion-secondarydeco);
+        margin-left: -3px;
+        padding: 1px 3px;
+    }
+
+    .layout .story-recommended article[data-ugc],
+    .layout .story-recommended article.is-ugc {
+        --tile-primarytint: var(--theme-ugc-primarytint, var(--theme-primarytint)) !important;
+        --tile-secondarytint: var(--theme-ugc-secondarytint, var(--theme-secondarytint)) !important;
+        --theme-primarydeco: var(--theme-ugc-primarydeco) !important;
+    }
+
+    .layout .story-recommended article[data-promotion],
+    .layout .story-recommended article.is-promotion {
+        --tile-background: rgba(0, 0, 0, 0.03) !important;
+        --theme-primarydeco: #747574 !important;
+    }
+
+    .layout .story-recommended article[data-promotion] header::after,
+    .layout .story-recommended article.is-promotion header::after {
+        color: var(--theme-primarydeco);
+        content: 'WERBUNG';
+        font: var(--kicker-font);
+        font-weight: 700;
+        letter-spacing: 0.01em;
+        margin-right: 1ex;
+        margin-top: 1ex;
+        text-transform: uppercase;
+        width: auto !important;
+    }
+
+    .layout .story-recommended article {
+        --tile-name: "tile--article-3x3";
+        --tile-border: solid;
+        --tile-background: transparent;
+        --tile-primarytint: var(--theme-primarytint);
+        --tile-secondarytint: var(--theme-secondarytint);
+        --tile-border-color: rgba(67, 67, 67, 0.15);
+        --tile-border-width: 0 0 1px;
+        --tile-direction: column;
+        --tile-margin: unset;
+        --tile-min-height: initial;
+        --tile-padding: var(--grid-column) var(--grid-column) var(--single-column-and-gap);
+        --tile-icon-filter: invert(35%);
+        --tile-icon-opacity: 1;
+        --figure-aspectratio: 1.77778;
+        --figure-basis: auto;
+        --figure-display: flex;
+        --figure-minheight: unset;
+        --figure-maxheight: unset;
+        --figure-minwidth: 100%;
+        --figure-maxwidth: unset;
+        --figure-align: auto;
+        --figure-position: unset;
+        --header-background: none;
+        --header-border-width: 0;
+        --header-contextual-border-width: 0;
+        --header-basis: calc(100% - var(--figure-basis));
+        --header-padding: var(--grid-column) 0 0;
+        --header-align-content: flex-start;
+        --header-align-self: auto;
+        --header-order: unset;
+        --header-text-shadow: unset;
+        --header-margin: auto 0 0 0;
+        --header-contextualmargin: 0;
+        --kicker-font: var(--w1-small);
+        --kicker-contextual-font: var(--kicker-font);
+        --label-fontsize: 1.2rem;
+        --label-lineheight: 1rem;
+        --label-bgcolor: transparent;
+        --label-txtcolor: --tile-primarycolor;
+        --label-padding: 2px 4px 1px;
+        --label-position: absolute;
+        --label-left: var(--grid-column);
+        --label-top: var(--grid-column);
+        --title-font: var(--w2-title);
+        --title-contextual-font: var(--title-font);
+        --subtitle-border-color: rgba(0, 0, 0, 0.07);
+        --subtitle-border-display: block;
+        --subtitle-contextual-border-display: none;
+        --subtitle-font: var(--w2-text);
+        --subtitle-contextual-font: var(--subtitle-font);
+        --subtitle-display: block;
+        --subtitle-contextualdisplay: none;
+    }
+
+    .layout {
+        grid-auto-flow: row !important;
+        --story-width: 615px;
+        --story-negativespace: calc((100% - var(--story-width)) / 2);
+        display: block;
+    }
+
+    .layout .story {
+        grid-column: content / span 12;
+        box-sizing: border-box;
+        position: relative;
+        width: 75%!important;
+    }
+
+    @media (max-width: 960px) {
+        .layout .story {
+            width: 100%!important;
+            padding-top: 40px;
+        }
+    }
+
+    .story-article {
+        margin: 0 auto;
+    }
+
+    .layout article.story-article p {
+        margin: 18px 0;
+    }
+    /*new stuff*/
+
+
+
+    @media (min-width: 960px) {
+        .layout .story-recommended {
+            margin: 30px 0;
+            overflow-x: visible;
+        }
+
+        .layout .story-recommended > div {
+            --template-columns: [content] repeat(12, minmax(69px, 90px)) [sitebar] minmax(300px, 615px)!important;
+            box-sizing: border-box;
+            display: grid;
+            grid-column-gap: var(--gap);
+            grid-row-gap: var(--row-gap, var(--gap));
+            grid-template-columns: var(--template-columns);
+        }
+    }
+
+
+    /*ads*/
+
+    #cg-service-box-wrapper {
+        margin: 0 auto!important;
+    }
+    #cg-service-box-anzeige {
+        margin-bottom: 0!important;
+    }
+    .cg_disclaim {
+        font-family: Arial, "Helvetica Neue", Helvetica, sans-serif !important;
+        font-style: italic !important;
+        font-weight: normal !important;
+        font-size: 12px !important;
+        line-height: 17px !important;
+        color: #777777 !important;
+        margin-top: 30px !important;
+
+        grid-column: content / span 12;
+        box-sizing: border-box;
+        position: relative;
+        width: 75%!important;
+    }
+
+    .cg_disclaim .cg_disclaim_wrapper {
+        max-width: 615px;
+        margin: 0 auto;
+    }
+
+    .cg_disclaim p {
+        margin-bottom: 0px !important;
+        margin-top: 0px !important;
+    }
+
+    .cg_disclaim p a {
+        color: var(--theme-primarytint);
+    }
+
+    #contented_skyscraper{
+        position:fixed;
+        left:1000px;
+        top:156px;
+    }
+    a.clickwordlink {
+        border-color: var(--theme-linkdeco);
+        border-style: solid;
+        border-width: 0 0 1px;
+        box-shadow: inset 0 -4px 0 var(--theme-linkdeco);
+        color: var(--theme-primarytint);
+        text-decoration: none;
+        transition: background-color 50ms ease,color 50ms ease,box-shadow 50ms ease,border-color 50ms ease;
+    }
+    a.clickwordlink:hover {
+        background-color: var(--theme-primarydeco);
+        border-color: var(--theme-primarydeco);
+        box-shadow: inset 0 -4px 0 var(--theme-primarydeco);
+        color: var(--theme-secondarydeco);
+    }
+</style>
+<div class="story js-story">
+    <article class="story-article">
+        <div>
+            <div class="cg_article-header">
+                <header>
+                    <h2 class="article-kicker">Agile service Organizsation</h2>
+                    <h1 class="article-title" itemprop="headline" data-theme-altfont="true">How STRG Became An Agile Service Organisation</h1>
+                    <p class="article-subtitle" itemprop="description"></p>
+
+                    <p class="article-pubdate">
+                        <time datetime="2019-06-19T06:00"> 07/09/2021
+                        </time>
+                    </p>
+
+
+                </header>
+            </div>
+            <div class="article-body">
+
+                <div data-section-type="gallery" data-position="auto" data-size="auto" data-gallery-type="secondary">
+                    <div>
+                        <div data-section-type="image" data-position="auto" data-size="auto">
+                            <div>
+
+                                <figure data-type="image" data-fullscreen-enabled="true">
+                                    <picture>
+                                        <img sizes="(max-width: 767px) 100vw,
+                (max-width: 959px) 680px,
+                (max-width: 1919px) 538px,
+                (min-width: 1920px) 720px" src= "https://images.content-garden.com/eyJidWNrZXQiOiJjb250ZW50LWdhcmRlbi1jZG4tcHJvZHVjdGlvbiIsImtleSI6ImltYWdlc1wvMzM0NTk2NjMtZGQ5NS00NWFjLWJiOGMtNTYyYWQyN2UwNDkwXC9hZ2lsZS1jb3Zlci03NzB4NTEwLmpwZWciLCJlZGl0cyI6eyJleHRyYWN0Ijp7ImxlZnQiOjEsInRvcCI6MCwid2lkdGgiOjc2NywiaGVpZ2h0Ijo1MTB9LCJyZXNpemUiOnsid2lkdGgiOjc2NywiaGVpZ2h0Ijo1MTB9fX0=" style="width:100%">
+
+                                    </picture>
+                                    <figcaption>
+
+
+                                    </figcaption>
+                                    <footer> </footer>
+                                </figure>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <p>
+                <p>Only the most agile businesses are able to profit from technology’s constant flux, to show customers that they are getting their money’s worth, and to keep their own workforce productive and motivated.  </p><iframe src="https://www.facebook.com/plugins/video.php?height=476&href=https%3A%2F%2Fwww.facebook.com%2Funiladmag%2Fvideos%2F3191766804384894%2F&show_text=false&width=380&t=0" width="380" height="476" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share" allowFullScreen="true"></iframe><blockquote class="twitter-tweet"><p lang="de" dir="ltr">Die Krone hat ein kurzes Gespräch mit dem Bundeskanzler zu seiner Einvernahme beim Landesgericht am Rande der <a href="https://twitter.com/hashtag/UNGA?src=hash&amp;ref_src=twsrc%5Etfw">#UNGA</a> in New York. Der Kanzler musste dann aber leider weg. <a href="https://t.co/KBsJ5Us3ng">https://t.co/KBsJ5Us3ng</a> <a href="https://t.co/XqTuQO8hUK">pic.twitter.com/XqTuQO8hUK</a></p>&mdash; Martin Thür (@MartinThuer) <a href="https://twitter.com/MartinThuer/status/1440759523266813952?ref_src=twsrc%5Etfw">September 22, 2021</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script><p>In 2019 STRG took a giant step forward by adopting a “Scrum” framework for Agile software development. Since then, we have not looked back – our productivity has increased, our clients are more satisfied with our transparency, and our work output has hardly suffered from the COVID-19 sh*tstorm. </p><script>
+              var cg_ad_tags = [];
+
+              function isMobile() {
+                if (navigator.userAgent.match(/Mobi/)) {
+                  return true;
+                }
+
+                if ('screen' in window && window.screen.width < 1366) {
+                  return true;
+                }
+
+                var connection = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
+                if (connection && connection.type === 'cellular') {
+                  return true;
+                }
+
+                return false;
+              }
+
+              var device = (isMobile()) ? 'mobile' : 'desktop'
+              cg_ad_tags = cg_ad_tags.filter(function (ad_tag) {
+                return ad_tag.devices.indexOf(device) !== -1;
+              });
+
+              if (!Array.isArray(cg_ad_tags) || cg_ad_tags.length > 0) {
+                var randomTag = cg_ad_tags[Math.floor(Math.random() * cg_ad_tags.length)];
+                document.write(randomTag.tag);
+              }
+            </script>
+                <p>An Agile mindset now pervades every aspect of our work. Our ultimate goal of becoming a complete Agile Service Organisation is at hand!</p><script>
+              var cg_ad_tags = [];
+
+              function isMobile() {
+                if (navigator.userAgent.match(/Mobi/)) {
+                  return true;
+                }
+
+                if ('screen' in window && window.screen.width < 1366) {
+                  return true;
+                }
+
+                var connection = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
+                if (connection && connection.type === 'cellular') {
+                  return true;
+                }
+
+                return false;
+              }
+
+              var device = (isMobile()) ? 'mobile' : 'desktop'
+              cg_ad_tags = cg_ad_tags.filter(function (ad_tag) {
+                return ad_tag.devices.indexOf(device) !== -1;
+              });
+
+              if (!Array.isArray(cg_ad_tags) || cg_ad_tags.length > 0) {
+                var randomTag = cg_ad_tags[Math.floor(Math.random() * cg_ad_tags.length)];
+                document.write(randomTag.tag);
+              }
+            </script>
+                <p>Over a hundred years ago, Henry Ford disrupted the Industrial Revolution by introducing the assembly line. His innovative factory could churn out a new automobile faster than its paint could dry. His radical re-organisation of labour into simple, repetitive tasks was perfectly suited to the mechanical commodity being produced. And it also perfectly satisfied the growing mass market demand for lower priced, quality autos.</p><blockquote class="instagram-media" data-instgrm-captioned data-instgrm-permalink="https://www.instagram.com/p/CUDEBv-o4od/?utm_source=ig_embed&amp;utm_campaign=loading" data-instgrm-version="13" style=" background:#FFF; border:0; border-radius:3px; box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15); margin: 1px; max-width:540px; min-width:326px; padding:0; width:99.375%; width:-webkit-calc(100% - 2px); width:calc(100% - 2px);"><div style="padding:16px;"> <a href="https://www.instagram.com/p/CUDEBv-o4od/?utm_source=ig_embed&amp;utm_campaign=loading" style=" background:#FFFFFF; line-height:0; padding:0 0; text-align:center; text-decoration:none; width:100%;" target="_blank"> <div style=" display: flex; flex-direction: row; align-items: center;"> <div style="background-color: #F4F4F4; border-radius: 50%; flex-grow: 0; height: 40px; margin-right: 14px; width: 40px;"></div> <div style="display: flex; flex-direction: column; flex-grow: 1; justify-content: center;"> <div style=" background-color: #F4F4F4; border-radius: 4px; flex-grow: 0; height: 14px; margin-bottom: 6px; width: 100px;"></div> <div style=" background-color: #F4F4F4; border-radius: 4px; flex-grow: 0; height: 14px; width: 60px;"></div></div></div><div style="padding: 19% 0;"></div> <div style="display:block; height:50px; margin:0 auto 12px; width:50px;"><svg width="50px" height="50px" viewBox="0 0 60 60" version="1.1" xmlns="https://www.w3.org/2000/svg" xmlns:xlink="https://www.w3.org/1999/xlink"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><g transform="translate(-511.000000, -20.000000)" fill="#000000"><g><path d="M556.869,30.41 C554.814,30.41 553.148,32.076 553.148,34.131 C553.148,36.186 554.814,37.852 556.869,37.852 C558.924,37.852 560.59,36.186 560.59,34.131 C560.59,32.076 558.924,30.41 556.869,30.41 M541,60.657 C535.114,60.657 530.342,55.887 530.342,50 C530.342,44.114 535.114,39.342 541,39.342 C546.887,39.342 551.658,44.114 551.658,50 C551.658,55.887 546.887,60.657 541,60.657 M541,33.886 C532.1,33.886 524.886,41.1 524.886,50 C524.886,58.899 532.1,66.113 541,66.113 C549.9,66.113 557.115,58.899 557.115,50 C557.115,41.1 549.9,33.886 541,33.886 M565.378,62.101 C565.244,65.022 564.756,66.606 564.346,67.663 C563.803,69.06 563.154,70.057 562.106,71.106 C561.058,72.155 560.06,72.803 558.662,73.347 C557.607,73.757 556.021,74.244 553.102,74.378 C549.944,74.521 548.997,74.552 541,74.552 C533.003,74.552 532.056,74.521 528.898,74.378 C525.979,74.244 524.393,73.757 523.338,73.347 C521.94,72.803 520.942,72.155 519.894,71.106 C518.846,70.057 518.197,69.06 517.654,67.663 C517.244,66.606 516.755,65.022 516.623,62.101 C516.479,58.943 516.448,57.996 516.448,50 C516.448,42.003 516.479,41.056 516.623,37.899 C516.755,34.978 517.244,33.391 517.654,32.338 C518.197,30.938 518.846,29.942 519.894,28.894 C520.942,27.846 521.94,27.196 523.338,26.654 C524.393,26.244 525.979,25.756 528.898,25.623 C532.057,25.479 533.004,25.448 541,25.448 C548.997,25.448 549.943,25.479 553.102,25.623 C556.021,25.756 557.607,26.244 558.662,26.654 C560.06,27.196 561.058,27.846 562.106,28.894 C563.154,29.942 563.803,30.938 564.346,32.338 C564.756,33.391 565.244,34.978 565.378,37.899 C565.522,41.056 565.552,42.003 565.552,50 C565.552,57.996 565.522,58.943 565.378,62.101 M570.82,37.631 C570.674,34.438 570.167,32.258 569.425,30.349 C568.659,28.377 567.633,26.702 565.965,25.035 C564.297,23.368 562.623,22.342 560.652,21.575 C558.743,20.834 556.562,20.326 553.369,20.18 C550.169,20.033 549.148,20 541,20 C532.853,20 531.831,20.033 528.631,20.18 C525.438,20.326 523.257,20.834 521.349,21.575 C519.376,22.342 517.703,23.368 516.035,25.035 C514.368,26.702 513.342,28.377 512.574,30.349 C511.834,32.258 511.326,34.438 511.181,37.631 C511.035,40.831 511,41.851 511,50 C511,58.147 511.035,59.17 511.181,62.369 C511.326,65.562 511.834,67.743 512.574,69.651 C513.342,71.625 514.368,73.296 516.035,74.965 C517.703,76.634 519.376,77.658 521.349,78.425 C523.257,79.167 525.438,79.673 528.631,79.82 C531.831,79.965 532.853,80.001 541,80.001 C549.148,80.001 550.169,79.965 553.369,79.82 C556.562,79.673 558.743,79.167 560.652,78.425 C562.623,77.658 564.297,76.634 565.965,74.965 C567.633,73.296 568.659,71.625 569.425,69.651 C570.167,67.743 570.674,65.562 570.82,62.369 C570.966,59.17 571,58.147 571,50 C571,41.851 570.966,40.831 570.82,37.631"></path></g></g></g></svg></div><div style="padding-top: 8px;"> <div style=" color:#3897f0; font-family:Arial,sans-serif; font-size:14px; font-style:normal; font-weight:550; line-height:18px;"> Sieh dir diesen Beitrag auf Instagram an</div></div><div style="padding: 12.5% 0;"></div> <div style="display: flex; flex-direction: row; margin-bottom: 14px; align-items: center;"><div> <div style="background-color: #F4F4F4; border-radius: 50%; height: 12.5px; width: 12.5px; transform: translateX(0px) translateY(7px);"></div> <div style="background-color: #F4F4F4; height: 12.5px; transform: rotate(-45deg) translateX(3px) translateY(1px); width: 12.5px; flex-grow: 0; margin-right: 14px; margin-left: 2px;"></div> <div style="background-color: #F4F4F4; border-radius: 50%; height: 12.5px; width: 12.5px; transform: translateX(9px) translateY(-18px);"></div></div><div style="margin-left: 8px;"> <div style=" background-color: #F4F4F4; border-radius: 50%; flex-grow: 0; height: 20px; width: 20px;"></div> <div style=" width: 0; height: 0; border-top: 2px solid transparent; border-left: 6px solid #f4f4f4; border-bottom: 2px solid transparent; transform: translateX(16px) translateY(-4px) rotate(30deg)"></div></div><div style="margin-left: auto;"> <div style=" width: 0px; border-top: 8px solid #F4F4F4; border-right: 8px solid transparent; transform: translateY(16px);"></div> <div style=" background-color: #F4F4F4; flex-grow: 0; height: 12px; width: 16px; transform: translateY(-4px);"></div> <div style=" width: 0; height: 0; border-top: 8px solid #F4F4F4; border-left: 8px solid transparent; transform: translateY(-4px) translateX(8px);"></div></div></div> <div style="display: flex; flex-direction: column; flex-grow: 1; justify-content: center; margin-bottom: 24px;"> <div style=" background-color: #F4F4F4; border-radius: 4px; flex-grow: 0; height: 14px; margin-bottom: 6px; width: 224px;"></div> <div style=" background-color: #F4F4F4; border-radius: 4px; flex-grow: 0; height: 14px; width: 144px;"></div></div></a><p style=" color:#c9c8cd; font-family:Arial,sans-serif; font-size:14px; line-height:17px; margin-bottom:0; margin-top:8px; overflow:hidden; padding:8px 0 7px; text-align:center; text-overflow:ellipsis; white-space:nowrap;"><a href="https://www.instagram.com/p/CUDEBv-o4od/?utm_source=ig_embed&amp;utm_campaign=loading" style=" color:#c9c8cd; font-family:Arial,sans-serif; font-size:14px; font-style:normal; font-weight:normal; line-height:17px; text-decoration:none;" target="_blank">Ein Beitrag geteilt von Cristiano Ronaldo (@cristiano)</a></p></div></blockquote> <script async src="//www.instagram.com/embed.js"></script><p>As the economy shifted from industrial production into information technology services, this 20th century labour concept was slow to adapt. Service organisations that continued to manage themselves with assembly-line methods found out that they couldn’t keep up with the rapid pace of change. Their staff took no ownership for overall customer satisfaction and their management hierarchies became complex and unproductive.</p><iframe src="https://assets.pinterest.com/ext/embed.html?id=473652085815926486" height="564" width="345" frameborder="0" scrolling="no" ></iframe><iframe width="100%" height="300" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/308686961&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true"></iframe><div style="font-size: 10px; color: #cccccc;line-break: anywhere;word-break: normal;overflow: hidden;white-space: nowrap;text-overflow: ellipsis; font-family: Interstate,Lucida Grande,Lucida Sans Unicode,Lucida Sans,Garuda,Verdana,Tahoma,sans-serif;font-weight: 100;"><a href="https://soundcloud.com/steevlacy" title="Steve Lacy" target="_blank" style="color: #cccccc; text-decoration: none;">Steve Lacy</a> · <a href="https://soundcloud.com/steevlacy/3-dark-red" title="Dark Red" target="_blank" style="color: #cccccc; text-decoration: none;">Dark Red</a></div><p>Over the last few decades, management methods have evolved, especially in the field of software development. Yet even a modern method such as “Waterfall” bears some resemblance to its industrial forerunner — each deliverable phase of a project must be completed on the development “assembly line” until the next one can begin. First design, then planning, then implementation, then testing, then rollout. </p><iframe src="https://open.spotify.com/embed/playlist/37i9dQZF1E35dgo3JpZ5km" width="100%" height="80" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe><iframe allow="autoplay *; encrypted-media *; fullscreen *" frameborder="0" height="450" style="width:100%;max-width:660px;overflow:hidden;background:transparent;" sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-storage-access-by-user-activation allow-top-navigation-by-user-activation" src="https://embed.music.apple.com/at/playlist/hyped/pl.914196c8783d46a5ba46f38eda448a43"></iframe><p>For complex, multi-layered digital IT projects, this can have negative results. The longer a development process goes on, the higher the risk that the finished product will be redundant or incompatible. The client is often kept in the dark between signing the contract and receiving a finished product. And the developer is financially liable when the project doesn’t go exactly according to plan. Quite often, this causes increased stress on the development staff, creates a need for rigid hierarchy, and results in clients’ expectations not being satisfied.</p><iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1920.9889518837444!2d12.645483208182013!3d47.0592613868166!2m3!1f54.00000000000015!2f76.13715763923128!3f0!3m2!1i1024!2i768!4f35!3m3!1m2!1s0x477712c196ca78c5%3A0x77a72d8b64cbc137!2sGro%C3%9Fglockner!5e1!3m2!1sde!2sat!4v1632341077030!5m2!1sde!2sat" width="400" height="300" style="border:0;" allowfullscreen="" loading="lazy"></iframe><blockquote class="tiktok-embed" cite="https://www.tiktok.com/@diego_forn22/video/6981095853092015366" data-video-id="6981095853092015366" style="max-width: 605px;min-width: 325px;" > <section> <a target="_blank" title="@diego_forn22" href="https://www.tiktok.com/@diego_forn22">@diego_forn22</a> <p>Lego snake part.2 🐍🧱<a title="viral" target="_blank" href="https://www.tiktok.com/tag/viral">#viral</a> <a title="fypシ" target="_blank" href="https://www.tiktok.com/tag/fyp%E3%82%B7">#fypシ</a></p> <a target="_blank" title="♬ walk it talk it - favsoundds " href="https://www.tiktok.com/music/walk-it-talk-it-6962615408344386309">♬ walk it talk it - favsoundds </a> </section> </blockquote> <script async src="https://www.tiktok.com/embed.js"></script><p>“With Waterfall, the final result and its development phases are defined in advance and a linear route is mapped out,” says STRG’s process manager, Jasmin Müller. “If there are any detours along the way, it is very costly to step backwards. If a client changes the original concept or wants new features during development, the entire project comes to a halt while the original contract terms are renegotiated.”<iframe title="YouTube video player" src="https://www.youtube.com/embed/8JclYxF-8Hw?enablejsapi=1" width="560" height="315" frameborder="0" allowfullscreen="allowfullscreen" data-publishing-video-id="a9f69f55-8547-4043-8bad-e8d310d223dd" class="contentgarden-video-youtube-iframe" id="contentgarden-video-youtube-iframe-a9f69f55-8547-4043-8bad-e8d310d223dd"></iframe></p><p><iframe src="https://player.vimeo.com/video/445394992?h=de3caefe1d&amp;byline=0&amp;portrait=0" width="640" height="360" frameborder="0" allowfullscreen="allowfullscreen"></iframe></p><script>
+              var cg_ad_tags = [{"devices":["desktop","mobile"],"tag":"\u003Cscript type=\u0022text\/javascript\u0022 src=\u0022https:\/\/cdn.content-garden.com\/tag.js?wp_id=4388093\u0026kid=4680434\u0026bid=14464215\u0026prf[article_id]=f075f9b8-c1a5-4bf0-8fda-05e055bedf8d\u0022 class=\u0022cg-tag-delivery\u0022\u003E\u003C\/script\u003E"}];
+
+              function isMobile() {
+                if (navigator.userAgent.match(/Mobi/)) {
+                  return true;
+                }
+
+                if ('screen' in window && window.screen.width < 1366) {
+                  return true;
+                }
+
+                var connection = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
+                if (connection && connection.type === 'cellular') {
+                  return true;
+                }
+
+                return false;
+              }
+
+              var device = (isMobile()) ? 'mobile' : 'desktop'
+              cg_ad_tags = cg_ad_tags.filter(function (ad_tag) {
+                return ad_tag.devices.indexOf(device) !== -1;
+              });
+
+              if (!Array.isArray(cg_ad_tags) || cg_ad_tags.length > 0) {
+                var randomTag = cg_ad_tags[Math.floor(Math.random() * cg_ad_tags.length)];
+                document.write(randomTag.tag);
+              }
+            </script>
+
+                </p>
+            </div>
+        </div>
+    </article>
+</div>
+<section class="story-recommended js-story-recommended">
+    <h1>Wir empfehlen folgende Artikel zum Weiterlesen:</h1>
+    <div>
+
+        <article>
+
+            <a href="https://www.derstandard.at/promotion/contentgarden/?advid=data-driven-publishing-reloaded-the-matrix-is-real-c039a32e" data-related-article-id="c039a32e-9fd9-4bba-90f7-9560359f818d" class="teaser-inner">
+                <figure data-type="image">
+                    <picture>
+                        <img src="https://images.content-garden.com/eyJidWNrZXQiOiJjb250ZW50LWdhcmRlbi1jZG4tcHJvZHVjdGlvbiIsImtleSI6ImltYWdlc1wvNzk0NTczOTEtZDkwZC00NDA0LWFmZWYtMjUzZDdhYTlmNmFlXC9zaW11bGF0aW9uLXJlYWxpdHktS29waWUtMi5qcGVnIiwiZWRpdHMiOnsicmVzaXplIjp7IndpZHRoIjo0MDAsImZpdCI6ImNvdmVyIn19fQ=="  srcset="https://images.content-garden.com/eyJidWNrZXQiOiJjb250ZW50LWdhcmRlbi1jZG4tcHJvZHVjdGlvbiIsImtleSI6ImltYWdlc1wvNzk0NTczOTEtZDkwZC00NDA0LWFmZWYtMjUzZDdhYTlmNmFlXC9zaW11bGF0aW9uLXJlYWxpdHktS29waWUtMi5qcGVnIiwiZWRpdHMiOnsicmVzaXplIjp7IndpZHRoIjo0MDAsImZpdCI6ImNvdmVyIn19fQ== 100vw,
+                https://images.content-garden.com/eyJidWNrZXQiOiJjb250ZW50LWdhcmRlbi1jZG4tcHJvZHVjdGlvbiIsImtleSI6ImltYWdlc1wvNzk0NTczOTEtZDkwZC00NDA0LWFmZWYtMjUzZDdhYTlmNmFlXC9zaW11bGF0aW9uLXJlYWxpdHktS29waWUtMi5qcGVnIiwiZWRpdHMiOnsicmVzaXplIjp7IndpZHRoIjo0MDAsImZpdCI6ImNvdmVyIn19fQ== 680px,
+                https://images.content-garden.com/eyJidWNrZXQiOiJjb250ZW50LWdhcmRlbi1jZG4tcHJvZHVjdGlvbiIsImtleSI6ImltYWdlc1wvNzk0NTczOTEtZDkwZC00NDA0LWFmZWYtMjUzZDdhYTlmNmFlXC9zaW11bGF0aW9uLXJlYWxpdHktS29waWUtMi5qcGVnIiwiZWRpdHMiOnsicmVzaXplIjp7IndpZHRoIjo0MDAsImZpdCI6ImNvdmVyIn19fQ== 538px,
+                https://images.content-garden.com/eyJidWNrZXQiOiJjb250ZW50LWdhcmRlbi1jZG4tcHJvZHVjdGlvbiIsImtleSI6ImltYWdlc1wvNzk0NTczOTEtZDkwZC00NDA0LWFmZWYtMjUzZDdhYTlmNmFlXC9zaW11bGF0aW9uLXJlYWxpdHktS29waWUtMi5qcGVnIiwiZWRpdHMiOnsicmVzaXplIjp7IndpZHRoIjo0MDAsImZpdCI6ImNvdmVyIn19fQ== 720px"
+                        >
+                    </picture>
+                </figure>
+                <header>
+                    <h1 class="teaser-title">  Data-Driven Publishing Reloaded – The Matrix is Real</h1>
+                    <p class="teaser-subtitle"></p>
+                </header>
+            </a>
+
+        </article>
+
+    </div>
+</section>
+
+
+<div id="contented_skyscraper" style="">
+    <script>
+      var cg_ad_tags = [];
+
+      function isMobile() {
+        if (navigator.userAgent.match(/Mobi/)) {
+          return true;
+        }
+
+        if ('screen' in window && window.screen.width < 1366) {
+          return true;
+        }
+
+        var connection = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
+        if (connection && connection.type === 'cellular') {
+          return true;
+        }
+
+        return false;
+      }
+
+      var device = (isMobile()) ? 'mobile' : 'desktop'
+      cg_ad_tags = cg_ad_tags.filter(function (ad_tag) {
+        return ad_tag.devices.indexOf(device) !== -1;
+      });
+
+      if (!Array.isArray(cg_ad_tags) || cg_ad_tags.length > 0) {
+        var randomTag = cg_ad_tags[Math.floor(Math.random() * cg_ad_tags.length)];
+        document.write(randomTag.tag);
+      }
+    </script>
+
+</div>
+<script>
+  function placeBanner() {
+
+    var windowWidth = window.innerWidth;
+    var distacneFromLeft = (windowWidth/100)*5;
+    var contentedSkyscraper = document.getElementById('contented_skyscraper')
+
+    contentedSkyscraper.style.display = 'none';
+
+    var containerWidth = contentedSkyscraper.offsetWidth;
+    if(containerWidth < 300){ containerWidth = 300 }
+
+
+    var headerHeight = 0
+    var siteHeader = document.getElementsByClassName('site--header-next')
+    if(typeof siteHeader[0] !== 'undefined') {
+      headerHeight = document.getElementsByClassName('site--header-next')[0].clientHeight;
+    }
+
+    var lastRecommendedStory = document.querySelectorAll('.js-story-recommended article')
+    if(lastRecommendedStory && lastRecommendedStory.length === 4) {
+      var lastRecommendedStoryEl = lastRecommendedStory[lastRecommendedStory.length - 1];
+      containerWidth = lastRecommendedStoryEl.offsetWidth;
+      distanceFromLeft = parseInt(lastRecommendedStoryEl.getBoundingClientRect().left);
+      distance = containerWidth + distanceFromLeft + 25;
+    }
+
+    if (window.innerWidth < 1281) {
+      contentedSkyscraper.style.display = 'none';
+    } else {
+      if(lastRecommendedStory && lastRecommendedStory.length === 4) {
+        contentedSkyscraper.style.left = distance + 'px';
+      } else {
+        contentedSkyscraper.style.left = windowWidth - containerWidth - distacneFromLeft + 'px';
+      }
+      contentedSkyscraper.style.top = 106 + 'px';
+      if(typeof document.getElementsByClassName('contentgarden-sitebar')[0] !== 'undefined') {
+        document.getElementsByClassName('contentgarden-sitebar')[0].style.left = contentedSkyscraper.style.left
+      }
+
+      contentedSkyscraper.style.display = 'inline';
+    }
+  }
+
+  window.onload = placeBanner();
+
+  document.addEventListener("DOMContentLoaded", function() {
+    placeBanner()
+  });
+
+  var addEvent = function(object, type, callback) {
+    if (object == null || typeof(object) == 'undefined') return;
+    if (object.addEventListener) {
+      object.addEventListener(type, callback, false);
+    } else if (object.attachEvent) {
+      object.attachEvent("on" + type, callback);
+    } else {
+      object["on" + type] = callback;
+    }
+  };
+
+  addEvent(window, "resize", function(event) {
+    placeBanner();
+  });
+
+  window.addEventListener('load', function() {
+    window.dispatchEvent(new Event('resize'));
+  });
+</script>
+
+<script type="text/javascript">
+  var functionToExecuteWhenReady = function () {
+    {var VIEW_TIME = {
+      seconds: 0,
+      interval: 2,
+      maximum: 300
+    };
+
+      window.contentgarden.dispatch('VIEW_TIME', VIEW_TIME)
+
+      setInterval(function() {
+        if (document.hidden) return;
+        VIEW_TIME.seconds += VIEW_TIME.interval;
+        if (VIEW_TIME.seconds > VIEW_TIME.maximum) return;
+        window.contentgarden.dispatch('VIEW_TIME', VIEW_TIME)
+      }, VIEW_TIME.interval * 1000);
+    }
+    {/**
+     * related article tracking script
+     */
+    var relatedArticleIds = [];
+      var relatedArticleLength = relatedArticleIds.length;
+
+      for (var index = 0; index < relatedArticleLength; index++) {
+        window.contentgarden.dispatch('RELATED_ARTICLE_VIEW', {to: relatedArticleIds[index]});
+      }
+
+      document.querySelectorAll('a[data-related-article-id]').forEach(function(relatedArticleNode) {
+        relatedArticleNode.addEventListener('click', function (event) {
+          window.contentgarden.dispatch('RELATED_ARTICLE_CLICK', {
+            to: event.currentTarget.dataset.relatedArticleId
+          });
+        });
+      });
+    }
+    {/**
+     * wordlinks tracking script
+     */
+    var wordlinkIds = [];
+      var wordlinkLength = wordlinkIds.length;
+
+      for (var index = 0; index < wordlinkLength; index++) {
+        window.contentgarden.dispatch('WORDLINK_VIEW', {id: wordlinkIds[index]});
+      }
+
+      document.querySelectorAll('a[data-wordlink-id]').forEach(function(wordlinkNode) {
+        wordlinkNode.addEventListener('click', function (event) {
+          window.contentgarden.dispatch('WORDLINK_CLICK', {
+            id: event.currentTarget.dataset.wordlinkId
+          });
+        });
+      });
+    }
+    {const CG_YOUTUBE_VIDEO_PROVIDER_IDENTIFIER_KEY = 'youtube';
+      const CG_3Q_VIDEO_PROVIDER_IDENTIFIER_KEY = 'Q3';
+
+      const CG_ARTICLE_VIDEO_YOUTUBE_IDENTIFIER_PATTERN = '.contentgarden-video-youtube-iframe';
+      const CG_ARTICLE_VIDEO_3Q_IDENTIFIER_PATTERN = '.contentgarden-video-3q-iframe';
+
+      const YOUTUBE_VIDEO_PROVIDER_API_URL = 'https://www.youtube.com/iframe_api';
+      const JS3Q_VIDEO_PROVIDER_API_URL = 'https://player.3qsdn.com/js3q.latest.js';
+
+      resolveCGArticleVideos();
+
+      function resolveCGArticleVideos()
+      {
+        console.log("Resolving.." + isCGVideosEmbedded());
+        if (isCGVideosEmbedded()) {
+          let providers = getDetectedVideoProviders();
+          console.log(providers);
+          for (let provider in providers) {
+            if (providers.hasOwnProperty(provider)) {
+              registerVideoProviderCGEvents(providers[provider]);
+            }
+          }
+        }
+      }
+
+      function registerVideoProviderCGEvents(provider)
+      {
+        switch (provider) {
+          case CG_YOUTUBE_VIDEO_PROVIDER_IDENTIFIER_KEY:
+            registerYouTubeCGEvents();
+            break;
+          case CG_3Q_VIDEO_PROVIDER_IDENTIFIER_KEY:
+            register3QVideoCGEvents();
+            break;
+        }
+      }
+
+      function registerYouTubeCGEvents()
+      {
+        registerVideoProviderAPI(CG_YOUTUBE_VIDEO_PROVIDER_IDENTIFIER_KEY);
+        window.onYouTubeIframeAPIReady = function() {
+          var iframes = document.querySelectorAll(CG_ARTICLE_VIDEO_YOUTUBE_IDENTIFIER_PATTERN);
+          iframes.forEach(function(iframe) {
+            var player = new YT.Player(iframe.id, {
+              events: {
+                onStateChange: onStateChange,
+                onError: onError
+              }
+            });
+          });
+        }
+
+        var onStateChange = function(event) {
+          var player = event.target;
+          var state = event.data;
+          var publishingVideoId = player.getIframe().getAttribute('data-publishing-video-id');
+          var currentTime = player.getCurrentTime();
+          var data = {publishingVideoId: publishingVideoId, time: currentTime};
+          switch (state) {
+            case YT.PlayerState.UNSTARTED:
+              console.debug('YT Player State Change', state, 'VIDEO_ENGAGED', data, event);
+              window.contentgarden.dispatch('VIDEO_ENGAGED', data);
+              break;
+            case YT.PlayerState.PLAYING:
+              console.debug('YT Player State Change', state, 'VIDEO_PLAYED', data, event);
+              window.contentgarden.dispatch('VIDEO_PLAYED', data);
+              break;
+            case YT.PlayerState.PAUSED:
+              console.debug('YT Player State Change', state, 'VIDEO_PAUSED', data, event);
+              window.contentgarden.dispatch('VIDEO_PAUSED', data);
+              break;
+            case YT.PlayerState.ENDED:
+              console.debug('YT Player State Change', state, 'VIDEO_ENDED', data, event);
+              window.contentgarden.dispatch('VIDEO_ENDED', data);
+              break;
+            default:
+              console.warn('Untracked YT Player State Change', state, data, event);
+          }
+
+          window.addEventListener('unload', function(e) {
+            console.debug('YT Player State Change', 'unload', data, e);
+            window.contentgarden.dispatch('VIDEO_PAUSED', data);
+          });
+        }
+
+        var onError = function (event) {
+          var publishingVideoId = event.target.getIframe().getAttribute('data-publishing-video-id');
+          var data = {publishingVideoId: publishingVideoId, errorCode: event.data};
+          console.debug('YT Player ERROR', data, event);
+          window.contentgarden.dispatch('VIDEO_ERROR', data);
+        }
+      }
+
+      function register3QVideoCGEvents()
+      {
+        registerVideoProviderAPI(CG_3Q_VIDEO_PROVIDER_IDENTIFIER_KEY);
+        let iframes = document.querySelectorAll(CG_ARTICLE_VIDEO_3Q_IDENTIFIER_PATTERN);
+        iframes.forEach(function(iframe) {
+          (function () {
+            var _js3qi = setInterval(function () {
+              if (typeof js3q != 'undefined') {
+                clearInterval(_js3qi);
+                let videoDataId = resolveQ3VideoDataId(iframe);
+                let publishingVideoId = iframe.getAttribute('data-publishing-video-id');
+                var js3qVideoPlayer = new js3q({
+                  'dataid': videoDataId,
+                  'container': iframe.id
+                });
+
+                let videoInitiallyEngaged = false;
+                js3qVideoPlayer.on('*.*', function (data) {
+                  var eventData = {publishingVideoId: publishingVideoId, time: js3qVideoPlayer.getCurrentTime()};
+                  switch (this.event) {
+                    case 'media.playing':
+                      console.log(publishingVideoId + ": VIDEO_PLAYED" + eventData.toString());
+                      window.contentgarden.dispatch('VIDEO_PLAYED', eventData);
+
+                      if (!videoInitiallyEngaged) {
+                        console.log(publishingVideoId + ": VIDEO_ENGAGED" + eventData.toString());
+                        window.contentgarden.dispatch('VIDEO_ENGAGED', eventData);
+                        videoInitiallyEngaged = true;
+                      }
+
+                      break;
+
+                    case 'media.paused':
+                      console.log(publishingVideoId + ": VIDEO_PAUSED" + eventData.toString());
+                      window.contentgarden.dispatch('VIDEO_PAUSED', eventData);
+                      break;
+
+                    case 'media.complete':
+                      console.log(publishingVideoId + ": VIDEO_ENDED" + eventData.toString());
+                      window.contentgarden.dispatch('VIDEO_ENDED', eventData);
+                      break;
+                  }
+                });
+
+                js3qVideoPlayer.on('configuration.loadError', function (data) {
+                  console.debug('3Q Player ERROR', data, this.event.message);
+                  var eventData = {publishingVideoId: publishingVideoId, errorCode: this.event.message};
+                  window.contentgarden.dispatch('VIDEO_ERROR', eventData);
+                });
+              }
+            }, 10);
+          })();
+        });
+      }
+
+      function resolveQ3VideoDataId(element)
+      {
+        if(element.getAttribute("data-playout-id")) {
+          return element.getAttribute("data-playout-id");
+        }
+
+        let url = element.id.match('[0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12}');
+        if (url !== null) {
+          return url[0];
+        }
+
+        return null;
+      }
+
+      function registerVideoProviderAPI(provider)
+      {
+        let apiUrl = null;
+        switch (provider) {
+          case CG_YOUTUBE_VIDEO_PROVIDER_IDENTIFIER_KEY:
+            apiUrl = YOUTUBE_VIDEO_PROVIDER_API_URL;
+            break;
+          case CG_3Q_VIDEO_PROVIDER_IDENTIFIER_KEY:
+            apiUrl = JS3Q_VIDEO_PROVIDER_API_URL;
+            break;
+        }
+
+        let tag = document.createElement("script");
+        tag.src = apiUrl;
+
+        let firstScriptTag = document.getElementsByTagName("script")[0] || document.getElementsByTagName('head')[0];
+        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+      }
+
+      function isCGVideosEmbedded()
+      {
+        let hasVideos = false;
+        var youtube = document.querySelector(CG_ARTICLE_VIDEO_YOUTUBE_IDENTIFIER_PATTERN);
+        var Q3 = document.querySelector(CG_ARTICLE_VIDEO_3Q_IDENTIFIER_PATTERN);
+
+        if (youtube !== null) { hasVideos = true; }
+        if (Q3 !== null) { hasVideos = true; }
+
+        return hasVideos;
+      }
+
+      function getDetectedVideoProviders()
+      {
+        let providers = [];
+        let youtube = document.querySelector(CG_ARTICLE_VIDEO_YOUTUBE_IDENTIFIER_PATTERN);
+        let Q3 = document.querySelector(CG_ARTICLE_VIDEO_3Q_IDENTIFIER_PATTERN);
+
+        if (youtube !== null) { providers.push(CG_YOUTUBE_VIDEO_PROVIDER_IDENTIFIER_KEY); }
+        if (Q3 !== null) { providers.push(CG_3Q_VIDEO_PROVIDER_IDENTIFIER_KEY); }
+
+        return providers;
+      }
+    }
+    {window.contentgarden.dispatch('ARTICLE_CONTENT_LOAD')}
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', function () {
+      functionToExecuteWhenReady();
+    });
+  } else {
+    /** if page is loaded => async loading behaviour */
+    functionToExecuteWhenReady();
+  }
+</script>
+
+</body>
+</html>
