@@ -1,4 +1,4 @@
-import { h, ref, onMounted, onUpdated, onBeforeUnmount, watch, nextTick } from 'vue'
+import { h, ref, onMounted, onUpdated, onBeforeUnmount, watch, nextTick } from '@vue/composition-api'
 import { getParams } from 'swiper/vue/get-params.js'
 import { initSwiper, mountSwiper } from 'swiper/vue/init-swiper.js'
 import { needsScrollbar, needsNavigation, needsPagination, uniqueClasses, extend } from 'swiper/vue/utils.js'

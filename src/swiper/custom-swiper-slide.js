@@ -1,4 +1,4 @@
-import { h, ref, onMounted, onUpdated, onBeforeUpdate, computed, onBeforeUnmount } from 'vue'
+import { h, ref, onMounted, onUpdated, onBeforeUpdate, computed, onBeforeUnmount } from '@vue/composition-api'
 import { uniqueClasses } from 'swiper/vue/utils.js'
 const SwiperSlide = {
   name: 'SwiperSlide',

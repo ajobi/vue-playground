@@ -1,4 +1,4 @@
-import { h } from 'vue'
+import { h } from '@vue/composition-api'
 import { Swiper } from './custom-swiper'
 
 function calcLoopedSlides (slides, swiperParams) {

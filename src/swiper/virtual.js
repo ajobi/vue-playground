@@ -1,6 +1,7 @@
-import { h } from 'vue'
+import { h } from '@vue/composition-api'
 
 function updateOnVirtualData (swiper) {
+  // eslint-disable-next-line no-mixed-operators
   if (!swiper || swiper.destroyed || !swiper.params.virtual || swiper.params.virtual && !swiper.params.virtual.enabled) { return }
   swiper.updateSlides()
   swiper.updateProgress()
