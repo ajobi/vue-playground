@@ -1,6 +1,8 @@
+<script>
 import { h, ref, onMounted, onUpdated, onBeforeUpdate, computed, onBeforeUnmount } from '@vue/composition-api'
 import { uniqueClasses } from 'swiper/vue/utils.js'
-const SwiperSlide = {
+
+export default {
   name: 'SwiperSlide',
   props: {
     tag: {
@@ -38,17 +40,23 @@ const SwiperSlide = {
     }
 
     onMounted(() => {
-      if (!swiperRef.value) { return }
+      if (!swiperRef.value) {
+        return
+      }
       swiperRef.value.on('_slideClass', updateClasses)
       eventAttached = true
     })
     onBeforeUpdate(() => {
-      if (eventAttached || !swiperRef || !swiperRef.value) { return }
+      if (eventAttached || !swiperRef || !swiperRef.value) {
+        return
+      }
       swiperRef.value.on('_slideClass', updateClasses)
       eventAttached = true
     })
     onUpdated(() => {
-      if (!slideElRef.value || !swiperRef || !swiperRef.value) { return }
+      if (!slideElRef.value || !swiperRef || !swiperRef.value) {
+        return
+      }
 
       if (swiperRef.value.destroyed) {
         if (slideClasses.value !== 'swiper-slide') {
@@ -57,11 +65,14 @@ const SwiperSlide = {
       }
     })
     onBeforeUnmount(() => {
-      if (!swiperRef || !swiperRef.value) { return }
+      if (!swiperRef || !swiperRef.value) {
+        return
+      }
       swiperRef.value.off('_slideClass', updateClasses)
     })
     const slideData = computed(() => ({
-      isActive: slideClasses.value.includes('swiper-slide-active') || slideClasses.value.includes('swiper-slide-duplicate-active'),
+      isActive: slideClasses.value.includes('swiper-slide-active') ||
+        slideClasses.value.includes('swiper-slide-duplicate-active'),
       isVisible: slideClasses.value.includes('swiper-slide-visible'),
       isDuplicate: slideClasses.value.includes('swiper-slide-duplicate'),
       isPrev: slideClasses.value.includes('swiper-slide-prev') || slideClasses.value.includes('swiper-slide-duplicate-prev'),
@@ -80,6 +91,5 @@ const SwiperSlide = {
         : slots.default && slots.default(slideData.value))
     }
   }
-
 }
-export { SwiperSlide }
+</script>

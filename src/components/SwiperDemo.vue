@@ -15,7 +15,8 @@
 </template>
 <script>
 // Import Swiper Vue.js components
-import { Swiper, SwiperSlide } from './swiper/custom-swiper-vue'
+import Swiper from './swiper/CustomSwiper'
+import SwiperSlide from './swiper/CustomSwiperSlide'
 
 // Import Swiper styles
 import 'swiper/swiper-bundle.css'

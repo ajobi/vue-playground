@@ -1,3 +1,4 @@
+<script>
 import { h, ref, onMounted, onUpdated, onBeforeUnmount, watch, nextTick } from '@vue/composition-api'
 import { getParams } from 'swiper/vue/get-params.js'
 import { initSwiper, mountSwiper } from 'swiper/vue/init-swiper.js'
@@ -7,7 +8,8 @@ import { getChildren } from 'swiper/vue/get-children.js'
 import { updateSwiper } from 'swiper/vue/update-swiper.js'
 import { renderVirtual, updateOnVirtualData } from './virtual.js'
 import { renderLoop, calcLoopedSlides } from './loop.js'
-const Swiper = {
+
+export default {
   name: 'Swiper',
   props: {
     tag: {
@@ -463,7 +465,19 @@ const Swiper = {
       default: undefined
     }
   },
-  emits: ['_beforeBreakpoint', '_containerClasses', '_slideClass', '_slideClasses', '_swiper', 'activeIndexChange', 'afterInit', 'autoplay', 'autoplayStart', 'autoplayStop', 'beforeDestroy', 'beforeInit', 'beforeLoopFix', 'beforeResize', 'beforeSlideChangeStart', 'beforeTransitionStart', 'breakpoint', 'changeDirection', 'click', 'disable', 'doubleTap', 'doubleClick', 'destroy', 'enable', 'fromEdge', 'hashChange', 'hashSet', 'imagesReady', 'init', 'keyPress', 'lazyImageLoad', 'lazyImageReady', 'lock', 'loopFix', 'momentumBounce', 'navigationHide', 'navigationShow', 'observerUpdate', 'orientationchange', 'paginationHide', 'paginationRender', 'paginationShow', 'paginationUpdate', 'progress', 'reachBeginning', 'reachEnd', 'realIndexChange', 'resize', 'scroll', 'scrollbarDragEnd', 'scrollbarDragMove', 'scrollbarDragStart', 'setTransition', 'setTranslate', 'slideChange', 'slideChangeTransitionEnd', 'slideChangeTransitionStart', 'slideNextTransitionEnd', 'slideNextTransitionStart', 'slidePrevTransitionEnd', 'slidePrevTransitionStart', 'slideResetTransitionStart', 'slideResetTransitionEnd', 'sliderMove', 'sliderFirstMove', 'slidesLengthChange', 'slidesGridLengthChange', 'snapGridLengthChange', 'snapIndexChange', 'swiper', 'tap', 'toEdge', 'touchEnd', 'touchMove', 'touchMoveOpposite', 'touchStart', 'transitionEnd', 'transitionStart', 'unlock', 'update', 'zoomChange'],
+  emits: ['_beforeBreakpoint', '_containerClasses', '_slideClass', '_slideClasses', '_swiper', 'activeIndexChange',
+    'afterInit', 'autoplay', 'autoplayStart', 'autoplayStop', 'beforeDestroy', 'beforeInit', 'beforeLoopFix',
+    'beforeResize', 'beforeSlideChangeStart', 'beforeTransitionStart', 'breakpoint', 'changeDirection', 'click', 'disable',
+    'doubleTap', 'doubleClick', 'destroy', 'enable', 'fromEdge', 'hashChange', 'hashSet', 'imagesReady', 'init', 'keyPress',
+    'lazyImageLoad', 'lazyImageReady', 'lock', 'loopFix', 'momentumBounce', 'navigationHide', 'navigationShow',
+    'observerUpdate', 'orientationchange', 'paginationHide', 'paginationRender', 'paginationShow', 'paginationUpdate',
+    'progress', 'reachBeginning', 'reachEnd', 'realIndexChange', 'resize', 'scroll', 'scrollbarDragEnd',
+    'scrollbarDragMove', 'scrollbarDragStart', 'setTransition', 'setTranslate', 'slideChange', 'slideChangeTransitionEnd',
+    'slideChangeTransitionStart', 'slideNextTransitionEnd', 'slideNextTransitionStart', 'slidePrevTransitionEnd',
+    'slidePrevTransitionStart', 'slideResetTransitionStart', 'slideResetTransitionEnd', 'sliderMove', 'sliderFirstMove',
+    'slidesLengthChange', 'slidesGridLengthChange', 'snapGridLengthChange', 'snapIndexChange', 'swiper', 'tap', 'toEdge',
+    'touchEnd', 'touchMove', 'touchMoveOpposite', 'touchStart', 'transitionEnd', 'transitionStart', 'unlock', 'update',
+    'zoomChange'],
 
   setup (props, {
     slots: originalSlots,
@@ -518,9 +532,11 @@ const Swiper = {
 
     swiperRef.value = initSwiper(swiperParams)
 
-    swiperRef.value.loopCreate = () => {}
+    swiperRef.value.loopCreate = () => {
+    }
 
-    swiperRef.value.loopDestroy = () => {}
+    swiperRef.value.loopDestroy = () => {
+    }
 
     if (swiperParams.loop) {
       swiperRef.value.loopedSlides = calcLoopedSlides(slidesRef.value, swiperParams)
@@ -541,7 +557,7 @@ const Swiper = {
     }
 
     onUpdated(() => {
-      // set initialized flag
+// set initialized flag
       if (!initializedRef.value && swiperRef.value) {
         swiperRef.value.emitSlidesClasses()
         initializedRef.value = true
@@ -576,7 +592,9 @@ const Swiper = {
     }) // mount swiper
 
     onMounted(() => {
-      if (!swiperElRef.value) { return }
+      if (!swiperElRef.value) {
+        return
+      }
       mountSwiper({
         el: swiperElRef.value,
         nextEl: nextElRef.value,
@@ -598,10 +616,12 @@ const Swiper = {
         return renderVirtual(swiperRef, slides, virtualData.value)
       }
 
-      // eslint-disable-next-line no-mixed-operators
+// eslint-disable-next-line no-mixed-operators
       if (!swiperParams.loop || swiperRef.value && swiperRef.value.destroyed) {
         slides.forEach((slide) => {
-          if (!slide.props) { slide.props = {} }
+          if (!slide.props) {
+            slide.props = {}
+          }
           slide.props.swiperRef = swiperRef
         })
         return slides
@@ -635,6 +655,5 @@ const Swiper = {
       }, [slots['wrapper-start'], renderSlides(slides), slots['wrapper-end']]), slots['container-end']])
     }
   }
-
 }
-export { Swiper }
+</script>
